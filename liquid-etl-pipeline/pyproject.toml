@@ -1,0 +1,58 @@
+[project]
+name = "liquid-etl-pipeline"
+version = "0.1.0"
+description = "Intelligent ETL pipeline using LiquidAI models and Pydantic AI"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [
+    {name = "Your Name", email = "you@example.com"}
+]
+keywords = ["etl", "llm", "rag", "pydantic", "liquidai", "fine-tuning"]
+
+dependencies = [
+    "liquid-shared-core",
+    "pydantic>=2.0",
+    "pydantic-ai[outlines-transformers]>=1.0",
+    "pydantic-graph>=0.1",
+    "torch>=2.0",
+    "transformers>=4.40",
+    "sentence-transformers>=2.2",
+    "chromadb>=0.4",
+    "pypdf>=3.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-asyncio>=0.21",
+    "black>=23.0",
+    "ruff>=0.1",
+    "mypy>=1.0",
+]
+
+[project.scripts]
+liquid-etl = "etl_pipeline.run_etl:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["etl_pipeline"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

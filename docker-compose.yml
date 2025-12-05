@@ -1,0 +1,190 @@
+# docker-compose.yml
+# Full LiquidAI stack orchestration
+#
+# Usage:
+#   CPU mode:  docker-compose up
+#   GPU mode:  docker-compose --profile gpu up
+#   ETL only:  docker-compose run etl
+#   RAG API:   docker-compose up rag
+#
+# Prepare:
+#   1. Download models to ./models/
+#   2. Place documents in ./data/raw/
+#   3. Run ETL first, then RAG
+
+version: '3.8'
+
+services:
+  # ETL Pipeline - runs on-demand to process documents
+  etl:
+    build:
+      context: ./liquid-etl-pipeline
+      args:
+        BASE_IMAGE: ${BASE_IMAGE:-nvidia/cuda:12.4.0-runtime-ubuntu22.04}
+    image: liquid-etl:latest
+    container_name: liquid-etl
+    volumes:
+      - ./models:/models:ro
+      - ./data:/data
+      - ./liquid-shared-core:/app/liquid-shared-core:ro
+    environment:
+      - CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-}
+      - HF_HOME=/models/.cache
+      - PYTHONPATH=/app:/app/liquid-shared-core
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    profiles:
+      - gpu
+      - etl
+    command: ["python3", "-m", "etl_pipeline.run_etl"]
+
+  # ETL Pipeline - CPU only version
+  etl-cpu:
+    build:
+      context: ./liquid-etl-pipeline
+      args:
+        BASE_IMAGE: python:3.11-slim
+    image: liquid-etl-cpu:latest
+    container_name: liquid-etl-cpu
+    volumes:
+      - ./models:/models:ro
+      - ./data:/data
+      - ./liquid-shared-core:/app/liquid-shared-core:ro
+    environment:
+      - CUDA_VISIBLE_DEVICES=
+      - HF_HOME=/models/.cache
+      - PYTHONPATH=/app:/app/liquid-shared-core
+    profiles:
+      - cpu
+      - etl-cpu
+    command: ["python3", "-m", "etl_pipeline.run_etl"]
+
+  # RAG Runtime API - always running
+  rag:
+    build:
+      context: ./liquid-rag-runtime
+      args:
+        BASE_IMAGE: ${BASE_IMAGE:-nvidia/cuda:12.4.0-runtime-ubuntu22.04}
+    image: liquid-rag:latest
+    container_name: liquid-rag
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./models:/models:ro
+      - ./data:/data:ro
+      - ./liquid-shared-core:/app/liquid-shared-core:ro
+    environment:
+      - CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-}
+      - HF_HOME=/models/.cache
+      - PYTHONPATH=/app:/app/liquid-shared-core
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    profiles:
+      - gpu
+      - rag
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    restart: unless-stopped
+
+  # RAG Runtime - CPU only
+  rag-cpu:
+    build:
+      context: ./liquid-rag-runtime
+      args:
+        BASE_IMAGE: python:3.11-slim
+    image: liquid-rag-cpu:latest
+    container_name: liquid-rag-cpu
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./models:/models:ro
+      - ./data:/data:ro
+      - ./liquid-shared-core:/app/liquid-shared-core:ro
+    environment:
+      - CUDA_VISIBLE_DEVICES=
+      - HF_HOME=/models/.cache
+      - PYTHONPATH=/app:/app/liquid-shared-core
+    profiles:
+      - cpu
+      - rag-cpu
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  # MCP RAG Server - for Pydantic AI integration
+  mcp-rag:
+    build:
+      context: ./liquid-mcp-tools
+      args:
+        BASE_IMAGE: python:3.11-slim
+    image: liquid-mcp-rag:latest
+    container_name: liquid-mcp-rag
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./models:/models:ro
+      - ./data:/data:ro
+      - ./liquid-shared-core:/app/liquid-shared-core:ro
+    environment:
+      - CUDA_VISIBLE_DEVICES=
+      - PYTHONPATH=/app:/app/liquid-shared-core
+    command: ["python3", "-m", "mcp_tools.servers.rag_server", "--transport", "sse", "--port", "8001"]
+    profiles:
+      - mcp
+
+  # Fine-tuning Trainer - runs on-demand
+  trainer:
+    build:
+      context: ./liquid-ft-trainer
+      args:
+        BASE_IMAGE: ${BASE_IMAGE:-nvidia/cuda:12.4.0-runtime-ubuntu22.04}
+    image: liquid-ft-trainer:latest
+    container_name: liquid-ft-trainer
+    volumes:
+      - ./models:/models
+      - ./data:/data
+      - ./liquid-shared-core:/app/liquid-shared-core:ro
+    environment:
+      - CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-0}
+      - HF_HOME=/models/.cache
+      - PYTHONPATH=/app:/app/liquid-shared-core
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    profiles:
+      - gpu
+      - train
+    command: ["python3", "-m", "ft_trainer.train", "--lora"]
+
+# Named volumes for persistent data
+volumes:
+  models:
+    driver: local
+  data:
+    driver: local
+
+# Network for inter-service communication
+networks:
+  default:
+    name: liquid-ai-network

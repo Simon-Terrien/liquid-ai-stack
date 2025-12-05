@@ -1,0 +1,36 @@
+[project]
+name = "liquid-mcp-tools"
+version = "0.1.0"
+description = "MCP servers for the LiquidAI stack"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [
+    {name = "Your Name", email = "you@example.com"}
+]
+keywords = ["mcp", "llm", "pydantic", "tools", "agents"]
+
+dependencies = [
+    "liquid-shared-core",
+    "mcp>=1.0",
+    "pydantic>=2.0",
+    "sentence-transformers>=2.2",
+    "chromadb>=0.4",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-asyncio>=0.21",
+]
+
+[project.scripts]
+liquid-mcp-rag = "mcp_tools.servers.rag_server:main"
+liquid-mcp-fs = "mcp_tools.servers.filesystem_server:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["mcp_tools"]
