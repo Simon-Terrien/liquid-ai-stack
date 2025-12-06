@@ -6,9 +6,13 @@ Provides REST API endpoints for:
 - Question answering
 - Direct search
 - Health checks
+- Metrics and monitoring
 """
 from typing import Optional, List
 import logging
+import time
+import psutil
+import torch
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -25,16 +29,23 @@ from .tools.retrieval import (
     hybrid_search,
     get_collection_stats,
 )
+from .middleware import RequestLoggingMiddleware, RateLimitMiddleware, CacheMiddleware
+from .metrics import metrics
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+# Track server start time
+SERVER_START_TIME = time.time()
+
 # Create FastAPI app
 app = FastAPI(
     title="Liquid RAG API",
-    description="RAG-based question answering using LiquidAI models",
-    version="0.1.0",
+    description="Production-ready RAG-based question answering using LiquidAI models",
+    version="0.2.0",
+    docs_url="/docs",
+    redoc_url="/redoc",
 )
 
 # Add CORS middleware
@@ -45,6 +56,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Add custom middleware (order matters - last added runs first)
+app.add_middleware(CacheMiddleware, ttl=300, max_size=1000)  # 5 min cache
+app.add_middleware(RateLimitMiddleware, calls=100, period=60)  # 100 req/min
+app.add_middleware(RequestLoggingMiddleware)
 
 
 # Request/Response models
@@ -91,25 +107,79 @@ class HealthResponse(BaseModel):
     """Health check response."""
     status: str
     vector_store: dict
-    version: str = "0.1.0"
+    version: str = "0.2.0"
+    uptime_seconds: Optional[float] = None
+    gpu: Optional[dict] = None
+    system: Optional[dict] = None
+    api_metrics: Optional[dict] = None
 
 
 # Endpoints
-@app.get("/health", response_model=HealthResponse)
+@app.get("/health")
 async def health_check():
-    """Health check endpoint."""
+    """
+    Enhanced health check endpoint.
+
+    Returns detailed system health including:
+    - Vector store status
+    - GPU availability and memory
+    - System resource usage
+    - API performance metrics
+    - Server uptime
+    """
     try:
-        stats = get_collection_stats()
-        return HealthResponse(
-            status="healthy",
-            vector_store=stats,
-        )
+        uptime = time.time() - SERVER_START_TIME
+
+        # GPU information
+        gpu_info = {
+            "available": torch.cuda.is_available(),
+        }
+        if torch.cuda.is_available():
+            gpu_info.update({
+                "device_count": torch.cuda.device_count(),
+                "current_device": torch.cuda.current_device(),
+                "device_name": torch.cuda.get_device_name(0),
+                "memory_allocated_gb": round(torch.cuda.memory_allocated() / 1e9, 2),
+                "memory_reserved_gb": round(torch.cuda.memory_reserved() / 1e9, 2),
+                "memory_total_gb": round(
+                    torch.cuda.get_device_properties(0).total_memory / 1e9, 2
+                ),
+            })
+
+        # System resource information
+        system_info = {
+            "cpu_percent": psutil.cpu_percent(interval=0.1),
+            "cpu_count": psutil.cpu_count(),
+            "memory_percent": psutil.virtual_memory().percent,
+            "memory_available_gb": round(
+                psutil.virtual_memory().available / 1e9, 2
+            ),
+            "memory_total_gb": round(psutil.virtual_memory().total / 1e9, 2),
+        }
+
+        # Vector store stats
+        try:
+            vector_stats = get_collection_stats()
+        except Exception as e:
+            vector_stats = {"error": str(e)}
+
+        return {
+            "status": "healthy",
+            "version": "0.2.0",
+            "uptime_seconds": round(uptime, 2),
+            "vector_store": vector_stats,
+            "gpu": gpu_info,
+            "system": system_info,
+            "api_metrics": metrics.get_stats(),
+        }
+
     except Exception as e:
         logger.error(f"Health check failed: {e}")
-        return HealthResponse(
-            status="degraded",
-            vector_store={"error": str(e)},
-        )
+        return {
+            "status": "degraded",
+            "error": str(e),
+            "version": "0.2.0",
+        }
 
 
 @app.post("/ask", response_model=AskResponse)
@@ -211,6 +281,33 @@ async def search_documents(request: SearchRequest):
 async def get_stats():
     """Get vector store statistics."""
     return get_collection_stats()
+
+
+@app.get("/metrics")
+async def get_metrics():
+    """
+    Get API performance metrics.
+
+    Returns:
+    - Total requests processed
+    - Error rate
+    - Cache hit rate
+    - Response time statistics (avg, min, max, percentiles)
+    - Requests per second
+    - Server uptime
+    """
+    return metrics.get_stats()
+
+
+@app.post("/metrics/reset")
+async def reset_metrics():
+    """
+    Reset all metrics counters.
+
+    Useful for testing or starting fresh monitoring periods.
+    """
+    metrics.reset()
+    return {"status": "metrics reset", "timestamp": time.time()}
 
 
 # CLI runner
