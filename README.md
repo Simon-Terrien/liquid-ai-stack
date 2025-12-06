@@ -2,6 +2,8 @@
 
 A production-ready, multi-repo architecture for building intelligent ETL pipelines, RAG systems, and fine-tuning workflows using **LiquidAI** models and **Pydantic AI**.
 
+Build secure, offline, compliant GenAI systems using local LiquidAI models — no cloud dependencies, no data exposure.
+
 ## 🎯 Features
 
 - **Multi-Model Intelligence**: Uses different LiquidAI models for different tasks
@@ -18,6 +20,45 @@ A production-ready, multi-repo architecture for building intelligent ETL pipelin
 - **MCP Tools**: Model Context Protocol servers for RAG and filesystem operations
 
 - **Docker Ready**: CPU and GPU containers with compose orchestration
+
+## 🧭 Use Cases
+
+| Use Case | Description |
+| --- | --- |
+| Secure RAG | No-cloud legal/medical knowledge bases |
+| SOC Automation | Offline incident knowledge retrieval |
+| Compliance AI | GDPR / ISO / NIST Q&A over policy docs |
+| Edge AI | Deployed on laptops or secure enclaves |
+| Multi-Agent Simulation | Autonomous incident response |
+
+## 📈 Benchmarks & Hardware Expectations
+
+| Model | Role | RAM | Speed CPU | Speed GPU |
+| --- | --- | --- | --- | --- |
+| 700M | RAG Runtime | ~4 GB | ⚡ Fast (15–22 tok/s) | ⚡⚡ Very Fast (90–120 tok/s) |
+| 1.2B | Summaries | ~6 GB | ◼ Medium | ⚡⚡ Fast |
+| 2.6B | Metadata / QA | ~10–12 GB | ◼ Slow | ⚡ Medium (≥12 GB VRAM recommended) |
+
+## 🔭 Observability
+
+- Built-in OpenTelemetry presence through Logfire
+- Monitor response quality, token usage, and hallucination scores
+
+```python
+import logfire
+
+logfire.configure()
+logfire.instrument_pydantic_ai()
+```
+
+## 🛡️ Security Controls
+
+This system follows security-by-design patterns aligned to ISO/IEC 27001 (confidentiality, integrity, logging), ISO/IEC 42010 architecture practices, and NIST SP 800-53 guardrails.
+
+- Zero-trust network: containers can run with `--network none`
+- Storage scoping: `/data` mount only
+- Policy enforcement: no remote inference calls
+- Audit traceability: agent tool calls are logged and typed
 
 ## 📦 Repository Structure
 
@@ -101,6 +142,8 @@ curl -X POST http://localhost:8000/ask \
 
 ## 🐳 Docker Deployment
 
+Deploy using our ready-to-run containers. Choose the profile that matches your hardware.
+
 ### CPU Mode
 
 ```bash
@@ -127,6 +170,26 @@ docker-compose --profile rag up
 ```
 
 ## 🏗️ Architecture
+
+### System Context
+
+```
++-------------+             +-----------------+
+| User / SOC  |  HTTP API   | RAG Runtime     |
+| Analyst     |────────────>| (700M Model)    |
++-------------+             +--------┬--------+
+                                          │
+                                          ▼
+                                 +----------------+
+                                 | Vector Store   |
+                                 | (metadata)     |
+                                 +----------------+
+                                          │
+                                    ETL Graph (2.6B + 1.2B + 700M)
+                                          │
+                                          ▼
+                                  Fine-Tuning Dataset
+```
 
 ### ETL Pipeline Graph
 
@@ -163,6 +226,24 @@ Raw Document
 Vector DB    FT Dataset
 (Chroma)      (JSONL)
 ```
+
+### Agent Taxonomy
+
+| Component | Model | Responsibility |
+| --- | --- | --- |
+| Chunking Agent | 2.6B | Semantic structure |
+| Metadata Agent | 2.6B | Risk/entity extraction |
+| Summary Agent | 1.2B | Knowledge condensation |
+| QA Agent | 2.6B | FT dataset creation |
+| Validation Agent | 700M | Hallucination filter |
+| RAG Agent | 700M | Low-latency answers |
+
+## 🧭 Governance & Maturity Roadmap
+
+- Phase 1: Local intelligent ETL + RAG
+- Phase 2: Agent-to-Agent MCP tools
+- Phase 3: Continuous evaluation and retraining loop
+- Phase 4: Policy-based access control + audit dashboards
 
 ### Device Selection Logic
 
@@ -242,6 +323,10 @@ config = FTConfig(
 - **No Remote Code**: Models loaded with `trust_remote_code=False`
 - **SafeTensors**: Uses safe serialization format
 - **Network Isolation**: Docker containers can run with `--network none`
+
+## 🙏 Acknowledgments
+
+This project builds on **LiquidAI**, whose efficient, CPU-deployable open models enable secure offline inference.
 
 ## 📄 License
 

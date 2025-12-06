@@ -39,6 +39,14 @@ from transformers import (
     TrainingArguments,
 )
 
+# MLflow tracking (optional)
+try:
+    from .mlflow_tracking import create_mlflow_tracker, MLflowCallback
+    MLFLOW_AVAILABLE = True
+except ImportError:
+    MLFLOW_AVAILABLE = False
+    logger.warning("MLflow tracking not available")
+
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -79,6 +87,12 @@ class FTConfig:
     # Hardware
     fp16: bool = True
     bf16: bool = False
+
+    # MLflow
+    use_mlflow: bool = True
+    mlflow_experiment: str = "liquid-ft-training"
+    mlflow_run_name: str | None = None
+    mlflow_tracking_uri: str | None = None
 
 
 class InstructionDataset(Dataset):
@@ -221,7 +235,7 @@ def train(
 ):
     """
     Run fine-tuning training.
-    
+
     Args:
         config: Training configuration
         data_path: Path to training data (JSONL file or directory)
@@ -232,73 +246,136 @@ def train(
     output_dir = config.output_dir
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    # Load model
-    model, tokenizer = load_model_for_training(config)
+    # Initialize MLflow tracking
+    mlflow_tracker = None
+    if config.use_mlflow and MLFLOW_AVAILABLE:
+        mlflow_tracker = create_mlflow_tracker(
+            experiment_name=config.mlflow_experiment,
+            run_name=config.mlflow_run_name,
+            tracking_uri=config.mlflow_tracking_uri,
+        )
+        mlflow_tracker.start_run()
 
-    # Load dataset
-    train_dataset = InstructionDataset(
-        data_path,
-        tokenizer,
-        max_length=config.max_seq_length,
-    )
+        # Log hyperparameters
+        mlflow_tracker.log_params({
+            "model": config.model_name,
+            "batch_size": config.batch_size,
+            "learning_rate": config.learning_rate,
+            "num_epochs": config.num_epochs,
+            "warmup_steps": config.warmup_steps,
+            "max_seq_length": config.max_seq_length,
+            "use_lora": config.use_lora,
+            "lora_r": config.lora_r,
+            "lora_alpha": config.lora_alpha,
+            "lora_dropout": config.lora_dropout,
+            "use_4bit": config.use_4bit,
+            "fp16": config.fp16,
+            "bf16": config.bf16,
+        })
 
-    eval_dataset = None
-    if eval_path and eval_path.exists():
-        eval_dataset = InstructionDataset(
-            eval_path,
+    try:
+        # Load model
+        model, tokenizer = load_model_for_training(config)
+
+        # Load dataset
+        train_dataset = InstructionDataset(
+            data_path,
             tokenizer,
             max_length=config.max_seq_length,
         )
 
-    # Training arguments
-    training_args = TrainingArguments(
-        output_dir=str(output_dir),
-        num_train_epochs=config.num_epochs,
-        per_device_train_batch_size=config.batch_size,
-        per_device_eval_batch_size=config.batch_size,
-        warmup_steps=config.warmup_steps,
-        learning_rate=config.learning_rate,
-        fp16=config.fp16 and torch.cuda.is_available(),
-        bf16=config.bf16 and torch.cuda.is_bf16_supported(),
-        logging_steps=10,
-        save_steps=500,
-        save_total_limit=3,
-        evaluation_strategy="steps" if eval_dataset else "no",
-        eval_steps=500 if eval_dataset else None,
-        load_best_model_at_end=True if eval_dataset else False,
-        report_to="none",  # Disable wandb etc.
-        gradient_accumulation_steps=4,
-        gradient_checkpointing=True,
-        optim="adamw_torch",
-    )
+        eval_dataset = None
+        if eval_path and eval_path.exists():
+            eval_dataset = InstructionDataset(
+                eval_path,
+                tokenizer,
+                max_length=config.max_seq_length,
+            )
 
-    # Data collator
-    data_collator = DataCollatorForLanguageModeling(
-        tokenizer=tokenizer,
-        mlm=False,
-    )
+        # Log dataset info
+        if mlflow_tracker:
+            mlflow_tracker.log_params({
+                "train_samples": len(train_dataset),
+                "eval_samples": len(eval_dataset) if eval_dataset else 0,
+                "data_path": str(data_path),
+            })
 
-    # Trainer
-    trainer = Trainer(
-        model=model,
-        args=training_args,
-        train_dataset=train_dataset,
-        eval_dataset=eval_dataset,
-        data_collator=data_collator,
-    )
+        # Training arguments
+        training_args = TrainingArguments(
+            output_dir=str(output_dir),
+            num_train_epochs=config.num_epochs,
+            per_device_train_batch_size=config.batch_size,
+            per_device_eval_batch_size=config.batch_size,
+            warmup_steps=config.warmup_steps,
+            learning_rate=config.learning_rate,
+            fp16=config.fp16 and torch.cuda.is_available(),
+            bf16=config.bf16 and torch.cuda.is_bf16_supported(),
+            logging_steps=10,
+            save_steps=500,
+            save_total_limit=3,
+            evaluation_strategy="steps" if eval_dataset else "no",
+            eval_steps=500 if eval_dataset else None,
+            load_best_model_at_end=True if eval_dataset else False,
+            report_to="none",  # Disable wandb etc. (using MLflow)
+            gradient_accumulation_steps=4,
+            gradient_checkpointing=True,
+            optim="adamw_torch",
+        )
 
-    # Train
-    logger.info("Starting training...")
-    trainer.train()
+        # Data collator
+        data_collator = DataCollatorForLanguageModeling(
+            tokenizer=tokenizer,
+            mlm=False,
+        )
 
-    # Save final model
-    final_path = output_dir / "final"
-    trainer.save_model(str(final_path))
-    tokenizer.save_pretrained(str(final_path))
+        # Callbacks
+        callbacks = []
+        if mlflow_tracker:
+            callbacks.append(MLflowCallback(mlflow_tracker))
 
-    logger.info(f"Training complete! Model saved to: {final_path}")
+        # Trainer
+        trainer = Trainer(
+            model=model,
+            args=training_args,
+            train_dataset=train_dataset,
+            eval_dataset=eval_dataset,
+            data_collator=data_collator,
+            callbacks=callbacks,
+        )
 
-    return final_path
+        # Train
+        logger.info("Starting training...")
+        train_result = trainer.train()
+
+        # Log final training metrics
+        if mlflow_tracker:
+            mlflow_tracker.log_metrics({
+                "final_train_loss": train_result.training_loss,
+                "total_epochs": config.num_epochs,
+            })
+
+        # Save final model
+        final_path = output_dir / "final"
+        trainer.save_model(str(final_path))
+        tokenizer.save_pretrained(str(final_path))
+
+        # Log model to MLflow
+        if mlflow_tracker:
+            mlflow_tracker.log_model(model, "final_model")
+            mlflow_tracker.log_artifact(final_path, "model_checkpoint")
+
+        logger.info(f"Training complete! Model saved to: {final_path}")
+
+        if mlflow_tracker:
+            mlflow_tracker.end_run(status="FINISHED")
+
+        return final_path
+
+    except Exception as e:
+        logger.error(f"Training failed: {e}")
+        if mlflow_tracker:
+            mlflow_tracker.end_run(status="FAILED")
+        raise
 
 
 def main():
