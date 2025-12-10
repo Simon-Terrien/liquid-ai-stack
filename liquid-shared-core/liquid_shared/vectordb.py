@@ -208,9 +208,10 @@ class VectorStore:
         logger.warning(f"Reset collection '{self.collection_name}'")
 
     def persist(self) -> None:
-        """Explicitly persist to disk (if using persistent storage)."""
-        if self.persist_dir:
-            self.client.persist()
+        """Persist vector store to disk (if using persistent storage)."""
+        # ChromaDB 0.4+ auto-persists, no need to call persist()
+        # Keeping this method for backwards compatibility
+        pass
 
 
 class EmbeddingService:

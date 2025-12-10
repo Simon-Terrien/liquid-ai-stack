@@ -26,6 +26,9 @@ dependencies = [
     "transformers>=4.40",
     "sentence-transformers>=2.2",
     "chromadb>=0.4",
+    "numpy>=1.24",
+    "scipy>=1.10",
+    "rouge-score>=0.1.2",
 ]
 
 [project.optional-dependencies]

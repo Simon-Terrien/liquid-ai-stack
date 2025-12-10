@@ -59,6 +59,9 @@ from .vectordb import (
     VectorStore,
 )
 
+# Experiments module (imported separately to avoid circular dependencies)
+# from . import experiments  # Users can import liquid_shared.experiments explicitly
+
 __version__ = "0.1.0"
 
 __all__ = [

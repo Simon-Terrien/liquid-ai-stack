@@ -1,0 +1,7 @@
+{"metric": "unified/total_seconds", "value": 18.319759349004016, "step": null, "timestamp": 1765406105.515965}
+{"metric": "unified/gpu_hours", "value": 0.005088827109999935, "step": null, "timestamp": 1765406105.5159771}
+{"metric": "unified/peak_memory_mb", "value": 5341.216796875, "step": null, "timestamp": 1765406105.5159812}
+{"metric": "unified/throughput_docs_per_min", "value": 16.375760963055992, "step": null, "timestamp": 1765406105.5159838}
+{"metric": "unified/num_chunks", "value": 0.0, "step": null, "timestamp": 1765406105.5159862}
+{"metric": "unified/num_qa_pairs", "value": 0.0, "step": null, "timestamp": 1765406105.5159888}
+{"metric": "unified/num_ft_samples", "value": 0.0, "step": null, "timestamp": 1765406105.5159905}

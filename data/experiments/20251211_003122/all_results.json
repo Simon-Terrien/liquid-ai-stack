@@ -1,0 +1,8 @@
+{
+  "dual_pipeline": {
+    "error": "cannot import name 'chunk_document_sync' from 'etl_pipeline.agents.chunking_agent' (/home/lupise/liquid-ai-stack/liquid-ai-stack/liquid-etl-pipeline/etl_pipeline/agents/chunking_agent.py)"
+  },
+  "rag_quality": {
+    "error": "No test queries provided and default dataset not found"
+  }
+}

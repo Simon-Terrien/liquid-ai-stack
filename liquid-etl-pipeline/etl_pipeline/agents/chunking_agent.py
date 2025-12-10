@@ -152,8 +152,8 @@ Split this into semantically coherent chunks. Return as JSON with a 'chunks' arr
     return result.output
 
 
-def chunk_document_sync(text: str, agent: Agent = None) -> ChunkingOutput:
-    """Synchronous version of chunk_document."""
+async def chunk_document(text: str, agent: Agent = None) -> ChunkingOutput:
+    """Async version of chunk_document."""
     if agent is None:
         agent = get_chunking_agent()
 
@@ -165,11 +165,33 @@ def chunk_document_sync(text: str, agent: Agent = None) -> ChunkingOutput:
 
 Split this into semantically coherent chunks. Return as JSON with a 'chunks' array."""
 
-    result = agent.run_sync(
+    result = await agent.run(
         prompt,
         model_settings=ModelSettings(
             extra_body={"max_new_tokens": 4096}
         )
     )
 
-    return result.output
+    return result.data
+
+
+def chunk_document_sync(text: str, agent: Agent = None) -> ChunkingOutput:
+    """
+    Synchronous wrapper for chunk_document.
+
+    NOTE: This will only work if there's no running event loop.
+    For use within async contexts (like pydantic-graph), use chunk_document() instead.
+    """
+    import asyncio
+
+    try:
+        # Try to get the running loop
+        loop = asyncio.get_running_loop()
+        # If we get here, there's a running loop - we can't use asyncio.run()
+        raise RuntimeError(
+            "chunk_document_sync() cannot be called from an async context. "
+            "Use 'await chunk_document()' instead."
+        )
+    except RuntimeError:
+        # No running loop, safe to use asyncio.run()
+        return asyncio.run(chunk_document(text, agent))

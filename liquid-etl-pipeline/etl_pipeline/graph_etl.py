@@ -22,11 +22,11 @@ from liquid_shared import (
 from pydantic_graph.beta import GraphBuilder, StepContext
 
 from .agents import (
-    chunk_document_sync,
-    extract_metadata_sync,
-    generate_qa_pairs_sync,
-    generate_summaries_sync,
-    validate_qa_pairs_sync,
+    chunk_document,
+    extract_metadata,
+    generate_qa_pairs,
+    generate_summaries,
+    validate_qa_pairs,
 )
 
 logger = logging.getLogger(__name__)
@@ -108,7 +108,7 @@ def build_etl_graph():
         logger.info(f"Chunking document: {ctx.state.source_path}")
 
         try:
-            result = chunk_document_sync(ctx.state.raw_text)
+            result = await chunk_document(ctx.state.raw_text)
             ctx.state.chunk_texts = result.chunks
             ctx.state.stats["num_chunks"] = len(result.chunks)
             logger.info(f"Created {len(result.chunks)} chunks")
@@ -125,7 +125,7 @@ def build_etl_graph():
         logger.info("Extracting metadata...")
 
         try:
-            chunks = extract_metadata_sync(
+            chunks = await extract_metadata(
                 ctx.inputs,
                 ctx.state.source_path
             )
@@ -146,7 +146,7 @@ def build_etl_graph():
         try:
             # Wait for chunks to have metadata
             chunks = ctx.state.chunks if ctx.state.chunks else ctx.inputs
-            summaries = generate_summaries_sync(chunks)
+            summaries = await generate_summaries(chunks)
             ctx.state.summaries = summaries
             logger.info(f"Generated {len(summaries)} summaries")
             return summaries
@@ -162,7 +162,7 @@ def build_etl_graph():
         logger.info("Generating QA pairs...")
 
         try:
-            qa_pairs = generate_qa_pairs_sync(ctx.state.chunks)
+            qa_pairs = await generate_qa_pairs(ctx.state.chunks)
             ctx.state.qa_pairs = qa_pairs
             ctx.state.stats["num_qa_generated"] = len(qa_pairs)
             logger.info(f"Generated {len(qa_pairs)} QA pairs")
@@ -179,7 +179,7 @@ def build_etl_graph():
         logger.info("Validating QA pairs...")
 
         try:
-            validated = validate_qa_pairs_sync(
+            validated = await validate_qa_pairs(
                 ctx.inputs,
                 ctx.state.chunks,
                 min_quality=0.6
@@ -299,7 +299,24 @@ def run_etl_pipeline_sync(
 ) -> ETLOutput:
     """Synchronous version of run_etl_pipeline."""
     import asyncio
-    return asyncio.run(run_etl_pipeline(source_path, raw_text))
+
+    try:
+        # Check if there's already a running event loop
+        loop = asyncio.get_running_loop()
+        # If we're already in an async context, create a task
+        # This requires nest_asyncio to work properly
+        try:
+            import nest_asyncio
+            nest_asyncio.apply()
+        except ImportError:
+            raise RuntimeError(
+                "nest_asyncio is required when calling from async context. "
+                "Install with: uv add nest-asyncio"
+            )
+        return asyncio.run(run_etl_pipeline(source_path, raw_text))
+    except RuntimeError:
+        # No running loop, safe to use asyncio.run()
+        return asyncio.run(run_etl_pipeline(source_path, raw_text))
 
 
 if __name__ == "__main__":

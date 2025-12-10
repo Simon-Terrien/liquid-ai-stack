@@ -1,0 +1,118 @@
+{
+  "experiment_name": "dual-pipeline-comparison",
+  "run_name": "dual_pipeline_efficiency",
+  "status": "FAILED",
+  "duration_seconds": 29.305978059768677,
+  "params": {
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "python_version": "3.12.3",
+    "pytorch_version": "2.9.1+cu128",
+    "cuda_available": true,
+    "cuda_version": "12.8",
+    "gpu_info": {
+      "available": true,
+      "count": 1,
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 4090 Laptop GPU",
+          "total_memory_gb": 15.99169921875,
+          "compute_capability": "8.9"
+        }
+      ]
+    },
+    "cpu_count": 32,
+    "name": "dual_pipeline_efficiency",
+    "description": "Compare unified vs separate ETL pipelines",
+    "experiment_type": "dual_pipeline",
+    "model": {
+      "name": "LFM2-2.6B",
+      "device": "auto",
+      "dtype": "auto",
+      "max_tokens": 512,
+      "temperature": 0.7,
+      "top_p": 0.9
+    },
+    "dataset": {
+      "name": "default",
+      "data_dir": "/home/lupise/liquid-ai-stack/liquid-ai-stack/liquid-shared-core/data",
+      "split": "all",
+      "max_samples": null,
+      "shuffle": false,
+      "seed": 42
+    },
+    "eval": {
+      "compute_recall_at_k": true,
+      "recall_k_values": [
+        1,
+        3,
+        5,
+        10
+      ],
+      "compute_mrr": true,
+      "compute_ndcg": true,
+      "compute_rouge": true,
+      "compute_bleu": true,
+      "compute_perplexity": false,
+      "n_bootstrap_samples": 1000,
+      "confidence_level": 0.95
+    },
+    "output_dir": "data/experiments/20251210_233432",
+    "mlflow_tracking_uri": null,
+    "mlflow_experiment_name": null,
+    "n_runs": 1,
+    "seed": 42,
+    "ablation_params": {}
+  },
+  "metrics_summary": {
+    "unified/total_seconds": {
+      "count": 1,
+      "mean": 18.319759349004016,
+      "min": 18.319759349004016,
+      "max": 18.319759349004016,
+      "final": 18.319759349004016
+    },
+    "unified/gpu_hours": {
+      "count": 1,
+      "mean": 0.005088827109999935,
+      "min": 0.005088827109999935,
+      "max": 0.005088827109999935,
+      "final": 0.005088827109999935
+    },
+    "unified/peak_memory_mb": {
+      "count": 1,
+      "mean": 5341.216796875,
+      "min": 5341.216796875,
+      "max": 5341.216796875,
+      "final": 5341.216796875
+    },
+    "unified/throughput_docs_per_min": {
+      "count": 1,
+      "mean": 16.375760963055992,
+      "min": 16.375760963055992,
+      "max": 16.375760963055992,
+      "final": 16.375760963055992
+    },
+    "unified/num_chunks": {
+      "count": 1,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "final": 0.0
+    },
+    "unified/num_qa_pairs": {
+      "count": 1,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "final": 0.0
+    },
+    "unified/num_ft_samples": {
+      "count": 1,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "final": 0.0
+    }
+  }
+}
