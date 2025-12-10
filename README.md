@@ -73,6 +73,28 @@ liquid-ai-stack/
 └── README.md
 ```
 
+## 📌 Current Implementation & Gaps
+
+The stack ships with five core, production-ready components:
+
+- **`liquid-shared-core`** – shared utilities, Pydantic models, and hardware helpers used by every service.
+- **`liquid-etl-pipeline`** – multi-agent ETL that chunks documents, enriches metadata, summarizes, and prepares
+  fine-tuning datasets alongside vector-store outputs.
+- **`liquid-rag-runtime`** – FastAPI-based RAG API exposing health, full-agent `/ask`, simple `/ask/simple`, and
+  `/search` endpoints with caching, metrics, and rate limits.
+- **`liquid-mcp-tools`** – Model Context Protocol servers that expose filesystem and RAG helpers for agent
+  interoperability.
+- **`liquid-ft-trainer`** – LoRA/QLoRA fine-tuning utilities for LFM2 700M, 1.2B, and 2.6B models.
+
+Remaining roadmap areas to implement:
+
+- **Continuous evaluation loop** that routes low-confidence answers or user feedback back into automated
+  fine-tuning jobs.
+- **Policy/audit dashboards** to visualize access controls and compliance logs beyond the API responses.
+- **User/admin UI** for chatting with agents and managing pipelines (the stack is currently API-centric/headless).
+- **CI/CD and advanced testing** (no GitHub Actions or similar workflows are present yet).
+- **Knowledge graph integration** to complement vector search with traversable semantic relationships.
+
 ## 🚀 Quick Start
 
 ### 1. Clone and Setup
