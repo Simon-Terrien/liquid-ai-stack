@@ -11,6 +11,9 @@ import json
 import logging
 from datetime import datetime
 from pathlib import Path
+from time import perf_counter
+
+from typing import TYPE_CHECKING
 
 from liquid_shared import (
     DATA_DIR,
@@ -20,6 +23,9 @@ from liquid_shared import (
 from pypdf import PdfReader
 
 from .graph_etl import ETLOutput, run_etl_pipeline_sync
+
+if TYPE_CHECKING:
+    from etl_pipeline.experiments.runtime import RuntimeCollector
 
 # Configure logging
 logging.basicConfig(
@@ -186,6 +192,7 @@ def run_etl(
     input_dir: Path | None = None,
     output_dir: Path | None = None,
     file_pattern: str = "*.*",
+    runtime_collector: "RuntimeCollector | None" = None,
 ) -> dict:
     """
     Run ETL on all documents in a directory.
@@ -194,7 +201,8 @@ def run_etl(
         input_dir: Directory with source documents (default: data/raw/)
         output_dir: Output directory (default: data/)
         file_pattern: Glob pattern for files
-        
+        runtime_collector: Optional metrics collector for research benchmarks
+
     Returns:
         Summary statistics
     """
@@ -206,6 +214,9 @@ def run_etl(
 
     logger.info("Initializing vector store...")
     vstore = VectorStore(VDB_DIR)
+
+    if runtime_collector:
+        runtime_collector.start_run()
 
     # Find documents
     supported_extensions = {".pdf", ".txt", ".md", ".rst"}
@@ -230,7 +241,12 @@ def run_etl(
     }
 
     for doc_path in documents:
+        start_time = perf_counter()
         result = process_document(doc_path, embedder, vstore)
+        elapsed = perf_counter() - start_time
+
+        if runtime_collector:
+            runtime_collector.record_document(doc_path, result, elapsed)
 
         if result:
             stats["documents_processed"] += 1

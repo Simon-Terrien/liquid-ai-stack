@@ -33,6 +33,7 @@ dev = [
 
 [project.scripts]
 liquid-etl = "etl_pipeline.run_etl:main"
+liquid-etl-benchmark = "etl_pipeline.experiments.benchmark:main"
 
 [build-system]
 requires = ["hatchling"]
