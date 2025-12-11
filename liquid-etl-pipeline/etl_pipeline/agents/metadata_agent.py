@@ -9,7 +9,7 @@ Extracts structured metadata from document chunks:
 - Importance scores
 """
 
-from liquid_shared import LFM_LARGE, Chunk, LocalLiquidModel
+from liquid_shared import LFM_MEDIUM, Chunk, LocalLiquidModel
 from pydantic import BaseModel, Field
 from pydantic_ai import Agent
 from pydantic_ai.settings import ModelSettings
@@ -92,7 +92,7 @@ def create_metadata_agent(model: LocalLiquidModel = None) -> Agent:
     """
     if model is None:
         model = LocalLiquidModel(
-            LFM_LARGE,
+            LFM_MEDIUM,  # Using 1.2B - optimal for data extraction per LFM2 docs
             max_new_tokens=2048,
             temperature=0.1,
         )

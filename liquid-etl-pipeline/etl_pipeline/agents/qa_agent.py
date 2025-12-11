@@ -6,7 +6,7 @@ Generates question-answer pairs from document chunks for fine-tuning.
 Each QA pair is grounded strictly in the source chunk content.
 """
 
-from liquid_shared import LFM_LARGE, Chunk, LocalLiquidModel, QAPair
+from liquid_shared import LFM_MEDIUM, Chunk, LocalLiquidModel, QAPair
 from pydantic import BaseModel, Field
 from pydantic_ai import Agent
 from pydantic_ai.settings import ModelSettings
@@ -86,7 +86,7 @@ def create_qa_agent(model: LocalLiquidModel = None) -> Agent:
     """
     if model is None:
         model = LocalLiquidModel(
-            LFM_LARGE,
+            LFM_MEDIUM,  # Using 1.2B - optimal for data extraction per LFM2 docs
             max_new_tokens=2048,
             temperature=0.3,  # Slightly higher for diversity
         )

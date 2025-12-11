@@ -7,7 +7,7 @@ Generates two types of text for each chunk:
 2. Embedding-optimized text (factual, dense, retrieval-friendly)
 """
 
-from liquid_shared import LFM_MEDIUM, Chunk, ChunkSummary, LocalLiquidModel
+from liquid_shared import LFM_SMALL, Chunk, ChunkSummary, LocalLiquidModel
 from pydantic import BaseModel, Field
 from pydantic_ai import Agent
 from pydantic_ai.settings import ModelSettings
@@ -70,8 +70,8 @@ def create_summary_agent(model: LocalLiquidModel = None) -> Agent:
     """
     if model is None:
         model = LocalLiquidModel(
-            LFM_MEDIUM,
-            max_new_tokens=1024,
+            LFM_SMALL,  # Using 700M - fast and efficient for summarization
+            max_new_tokens=512,
             temperature=0.2,
         )
 

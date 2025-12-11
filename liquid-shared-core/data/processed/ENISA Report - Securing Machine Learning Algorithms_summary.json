@@ -1,0 +1,16 @@
+{
+  "source": "/home/lupise/liquid-ai-stack/liquid-ai-stack/liquid-shared-core/data/raw/ENISA Report - Securing Machine Learning Algorithms.pdf",
+  "processed_at": "2025-12-11T23:17:08.235323",
+  "stats": {
+    "chunking_strategy": "agent",
+    "num_chunks": 4,
+    "num_qa_generated": 7,
+    "num_qa_validated": 1,
+    "qa_pass_rate": 0.14285714285714285,
+    "num_ft_samples": 1
+  },
+  "num_chunks": 4,
+  "num_summaries": 4,
+  "num_qa_pairs": 1,
+  "num_ft_samples": 1
+}

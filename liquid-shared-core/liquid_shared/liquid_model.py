@@ -82,7 +82,12 @@ class LocalLiquidModel:
         }
 
         if device_config.device == "cuda":
-            model_kwargs["device_map"] = "auto"
+            # Use explicit device mapping to avoid meta device issues
+            # Place entire model on the specified CUDA device
+            model_kwargs["device_map"] = {"": "cuda:0"}
+        else:
+            # For CPU, load without device_map and manually move
+            model_kwargs["low_cpu_mem_usage"] = True
 
         self._hf_model = AutoModelForCausalLM.from_pretrained(
             model_name_or_path,
@@ -153,6 +158,27 @@ class LocalLiquidModel:
             "max_new_tokens": self.max_new_tokens,
             "temperature": self.temperature,
         }
+
+    def cleanup(self) -> None:
+        """Clean up model from memory."""
+        import gc
+
+        if hasattr(self, '_hf_model'):
+            del self._hf_model
+        if hasattr(self, '_pydantic_model'):
+            del self._pydantic_model
+        if hasattr(self, 'tokenizer'):
+            del self.tokenizer
+
+        # Force garbage collection
+        gc.collect()
+
+        # Clear CUDA cache if using GPU
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+            torch.cuda.synchronize()
+
+        logger.info(f"Cleaned up model {self.model_name} from memory")
 
 
 # Pre-configured model factories for common use cases

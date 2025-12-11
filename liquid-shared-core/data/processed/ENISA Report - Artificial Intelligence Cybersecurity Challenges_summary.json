@@ -1,0 +1,16 @@
+{
+  "source": "/home/lupise/liquid-ai-stack/liquid-ai-stack/liquid-shared-core/data/raw/ENISA Report - Artificial Intelligence Cybersecurity Challenges.pdf",
+  "processed_at": "2025-12-11T23:18:36.485560",
+  "stats": {
+    "chunking_strategy": "agent",
+    "num_chunks": 4,
+    "num_qa_generated": 4,
+    "num_qa_validated": 3,
+    "qa_pass_rate": 0.75,
+    "num_ft_samples": 3
+  },
+  "num_chunks": 4,
+  "num_summaries": 4,
+  "num_qa_pairs": 3,
+  "num_ft_samples": 3
+}

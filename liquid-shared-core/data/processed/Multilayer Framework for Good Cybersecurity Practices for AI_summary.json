@@ -1,0 +1,16 @@
+{
+  "source": "/home/lupise/liquid-ai-stack/liquid-ai-stack/liquid-shared-core/data/raw/Multilayer Framework for Good Cybersecurity Practices for AI.pdf",
+  "processed_at": "2025-12-11T23:21:59.452596",
+  "stats": {
+    "chunking_strategy": "agent",
+    "num_chunks": 5,
+    "num_qa_generated": 4,
+    "num_qa_validated": 3,
+    "qa_pass_rate": 0.75,
+    "num_ft_samples": 3
+  },
+  "num_chunks": 5,
+  "num_summaries": 5,
+  "num_qa_pairs": 3,
+  "num_ft_samples": 3
+}

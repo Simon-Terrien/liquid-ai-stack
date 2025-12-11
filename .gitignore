@@ -91,3 +91,7 @@ Thumbs.db
 mlflow.db
 data/experiments/all_results.json
 data/experiments/20251210_233107/all_results.json
+PREVIOUS_ETL_INSIGHTS.md
+ETL/
+liquid-shared-core/data/vectordb/
+

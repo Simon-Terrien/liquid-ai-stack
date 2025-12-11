@@ -9,7 +9,7 @@ Splits documents into semantically coherent chunks based on:
 - Logical coherence
 """
 
-from liquid_shared import LFM_LARGE, LocalLiquidModel
+from liquid_shared import LFM_MEDIUM, LocalLiquidModel
 from pydantic import BaseModel, Field
 from pydantic_ai import Agent
 from pydantic_ai.settings import ModelSettings
@@ -63,16 +63,16 @@ No prose, no markdown, no chunk text.
 def create_chunking_agent(model: LocalLiquidModel = None) -> Agent:
     """
     Create the chunking agent.
-    
+
     Args:
-        model: Optional pre-loaded model. If None, loads LFM2-2.6B.
-        
+        model: Optional pre-loaded model. If None, loads LFM2-1.2B.
+
     Returns:
         Configured Pydantic AI Agent
     """
     if model is None:
         model = LocalLiquidModel(
-            LFM_LARGE,
+            LFM_MEDIUM,  # Using 1.2B - optimal for data extraction per LFM2 docs
             max_new_tokens=2048,
             temperature=0.0,  # Deterministic chunking
         )

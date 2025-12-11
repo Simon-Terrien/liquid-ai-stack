@@ -2,12 +2,15 @@
 """
 ETL Pipeline Agents using Pydantic AI + LiquidAI models.
 
-Each agent uses an appropriately sized model:
-- chunking_agent: LFM2-2.6B (quality-focused semantic chunking)
-- metadata_agent: LFM2-2.6B (rich metadata extraction)
-- summary_agent: LFM2-1.2B (balanced summarization)
-- qa_agent: LFM2-2.6B (diverse QA generation)
+Each agent uses an appropriately sized model per LFM2 recommendations:
+- chunking_agent: LFM2-1.2B (optimal for data extraction tasks)
+- metadata_agent: LFM2-1.2B (optimal for data extraction tasks)
+- summary_agent: LFM2-700M (fast and efficient for summarization)
+- qa_agent: LFM2-1.2B (optimal for data extraction tasks)
 - validate_agent: LFM2-700M (fast quality filtering)
+
+All models are specifically recommended by LFM2 docs for "agentic tasks,
+data extraction, and RAG" use cases. Total VRAM usage: ~10.5GB < 16GB available.
 """
 
 from .chunking_agent import (
