@@ -22,8 +22,16 @@ class ChunkBoundary(BaseModel):
     reason: str = Field(description="Why this boundary was chosen")
 
 
+class ChunkingAgentOutput(BaseModel):
+    """Minimal output returned directly by the LLM."""
+    boundaries: list[ChunkBoundary] = Field(
+        default_factory=list,
+        description="Boundary information for each chunk"
+    )
+
+
 class ChunkingOutput(BaseModel):
-    """Output from the intelligent chunking process."""
+    """Output after post-processing the LLM response."""
     chunks: list[str] = Field(description="List of chunk texts")
     boundaries: list[ChunkBoundary] = Field(
         default_factory=list,
@@ -33,44 +41,22 @@ class ChunkingOutput(BaseModel):
 
 CHUNKING_INSTRUCTIONS = """You are an expert document analyzer specializing in semantic text segmentation.
 
-Your task is to split the provided document into semantically coherent chunks. Each chunk should:
+Mark semantic chunk boundaries only. Do NOT return chunk text. Use character offsets on the raw text.
 
-1. **Be Self-Contained**: A chunk should make sense on its own, containing a complete thought or topic.
+Rules for boundaries:
+1. Respect natural transitions: headings, topic shifts, paragraph breaks that signal new ideas, list completions, definitions.
+2. Preserve context: never split mid-sentence, inside a list item, between a heading and its content, or inside a code block/table row.
+3. Size: aim for 500-1500 tokens per chunk; smaller is acceptable for short sections.
+4. Keep boundaries ordered from start to end and non-empty (end_char > start_char).
 
-2. **Respect Natural Boundaries**:
-   - Section/heading transitions
-   - Topic shifts
-   - Paragraph breaks that signal new ideas
-   - List completions
-   - Definition completions
-
-3. **Optimal Size**: Aim for 500-1500 tokens per chunk. Smaller is acceptable for distinct sections.
-
-4. **Preserve Context**: Never split:
-   - Mid-sentence
-   - In the middle of a list
-   - Between a term and its definition
-   - Between a heading and its content
-
-5. **Handle Special Cases**:
-   - Tables: Keep complete or split by logical row groups
-   - Code blocks: Keep complete
-   - Nested lists: Keep hierarchy intact
-
-CRITICAL: Return valid JSON with a list of chunk texts. Each chunk text should be the exact text from the document, preserving all formatting and whitespace.
-
-Example output structure:
+Return ONLY valid JSON with this exact schema:
 {
-  "chunks": [
-    "First chunk text here...",
-    "Second chunk text here...",
-    "Third chunk text here..."
-  ],
   "boundaries": [
-    {"start_char": 0, "end_char": 500, "reason": "Introduction section"},
-    {"start_char": 500, "end_char": 1200, "reason": "Topic shift to methodology"}
+    {"start_char": 0, "end_char": 500, "reason": "Introduction"}
   ]
 }
+
+No prose, no markdown, no chunk text.
 """
 
 
@@ -88,12 +74,12 @@ def create_chunking_agent(model: LocalLiquidModel = None) -> Agent:
         model = LocalLiquidModel(
             LFM_LARGE,
             max_new_tokens=2048,
-            temperature=0.1,  # Low temp for deterministic chunking
+            temperature=0.0,  # Deterministic chunking
         )
 
     agent = Agent(
         model=model.get_pydantic_model(),
-        output_type=ChunkingOutput,
+        output_type=ChunkingAgentOutput,
         instructions=CHUNKING_INSTRUCTIONS,
     )
 
@@ -112,67 +98,79 @@ def get_chunking_agent() -> Agent:
     return _chunking_agent
 
 
+def _normalize_boundaries(
+    text: str,
+    boundaries: list[ChunkBoundary],
+    max_chunks: int,
+) -> list[ChunkBoundary]:
+    """Clamp, deduplicate, and truncate boundaries to fit the source text."""
+    text_len = len(text)
+    normalized: list[ChunkBoundary] = []
+
+    for boundary in boundaries:
+        start = max(0, min(text_len, boundary.start_char))
+        end = max(0, min(text_len, boundary.end_char))
+        if end <= start:
+            continue
+        normalized.append(
+            ChunkBoundary(
+                start_char=start,
+                end_char=end,
+                reason=boundary.reason,
+            )
+        )
+
+    normalized.sort(key=lambda b: b.start_char)
+
+    deduped: list[ChunkBoundary] = []
+    last_end = -1
+    for boundary in normalized:
+        if boundary.start_char < last_end:
+            # Skip overlaps to keep ordering clean
+            continue
+        deduped.append(boundary)
+        last_end = boundary.end_char
+
+    return deduped[:max_chunks]
+
+
+def _boundaries_to_chunks(text: str, boundaries: list[ChunkBoundary]) -> list[str]:
+    """Slice chunk texts from the original document using boundaries."""
+    return [text[b.start_char:b.end_char] for b in boundaries]
+
+
 async def chunk_document(
     text: str,
     agent: Agent = None,
     max_chunks: int = 100,
+    max_prompt_chars: int = 32000,
 ) -> ChunkingOutput:
-    """
-    Chunk a document using the intelligent chunking agent.
-    
-    Args:
-        text: Raw document text
-        agent: Optional agent instance
-        max_chunks: Maximum number of chunks to produce
-        
-    Returns:
-        ChunkingOutput with list of chunks
+    """Chunk a document using the intelligent chunking agent.
+
+    Falls back to returning an empty list if the agent returns no usable boundaries.
     """
     if agent is None:
         agent = get_chunking_agent()
 
-    # For very long documents, we may need to chunk in batches
-    # This is a simple implementation; production would need sliding window
-
-    prompt = f"""Please analyze and chunk the following document:
+    prompt = f"""Identify semantic chunk boundaries for the document below.
+Return ONLY JSON with the 'boundaries' field. Do not include chunk text.
 
 ---
-{text[:32000]}
+{text[:max_prompt_chars]}
 ---
-
-Split this into semantically coherent chunks. Return as JSON with a 'chunks' array."""
+"""
 
     result = await agent.run(
         prompt,
         model_settings=ModelSettings(
             extra_body={"max_new_tokens": 4096}
-        )
+        ),
     )
 
-    return result.output
+    boundaries = _normalize_boundaries(text, result.output.boundaries, max_chunks)
+    chunks = _boundaries_to_chunks(text, boundaries)
 
-
-async def chunk_document(text: str, agent: Agent = None) -> ChunkingOutput:
-    """Async version of chunk_document."""
-    if agent is None:
-        agent = get_chunking_agent()
-
-    prompt = f"""Please analyze and chunk the following document:
-
----
-{text[:32000]}
----
-
-Split this into semantically coherent chunks. Return as JSON with a 'chunks' array."""
-
-    result = await agent.run(
-        prompt,
-        model_settings=ModelSettings(
-            extra_body={"max_new_tokens": 4096}
-        )
-    )
-
-    return result.data
+    return ChunkingOutput(chunks=chunks, boundaries=boundaries)
 
 
 def chunk_document_sync(text: str, agent: Agent = None) -> ChunkingOutput:

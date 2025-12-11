@@ -12,6 +12,7 @@ Orchestrates the complete ETL workflow:
 """
 import logging
 from dataclasses import dataclass, field
+from typing import Iterable
 
 from liquid_shared import (
     Chunk,
@@ -101,6 +102,29 @@ def build_etl_graph():
     """
     g = GraphBuilder(state_type=ETLState, output_type=ETLOutput)
 
+    def _fallback_chunk(text: str, max_chunk_chars: int = 1200) -> list[str]:
+        """Deterministic chunking fallback using paragraph grouping."""
+        paragraphs: Iterable[str] = text.split("\n\n") if text else []
+        chunks: list[str] = []
+        current: list[str] = []
+        current_len = 0
+
+        for para in paragraphs:
+            para_len = len(para)
+            # Start a new chunk if this paragraph would exceed target size
+            if current and current_len + para_len + 2 > max_chunk_chars:
+                chunks.append("\n\n".join(current).strip())
+                current = []
+                current_len = 0
+
+            current.append(para)
+            current_len += para_len + 2  # account for the separator
+
+        if current:
+            chunks.append("\n\n".join(current).strip())
+
+        return [c for c in chunks if c]
+
     # Step 1: Intelligent Chunking
     @g.step
     async def chunk_document_step(ctx: StepContext[ETLState, None, None]) -> list[str]:
@@ -110,13 +134,19 @@ def build_etl_graph():
         try:
             result = await chunk_document(ctx.state.raw_text)
             ctx.state.chunk_texts = result.chunks
+            ctx.state.stats["chunking_strategy"] = "agent"
             ctx.state.stats["num_chunks"] = len(result.chunks)
             logger.info(f"Created {len(result.chunks)} chunks")
             return result.chunks
         except Exception as e:
-            ctx.state.errors.append(f"Chunking failed: {e}")
-            logger.error(f"Chunking failed: {e}")
-            raise
+            # Fallback to deterministic splitter to keep pipeline running
+            logger.warning(f"Chunking agent failed, using fallback: {e}")
+            fallback_chunks = _fallback_chunk(ctx.state.raw_text)
+            ctx.state.chunk_texts = fallback_chunks
+            ctx.state.stats["chunking_strategy"] = "fallback_simple"
+            ctx.state.stats["num_chunks"] = len(fallback_chunks)
+            ctx.state.errors.append(f"Chunking agent failed, fallback used: {e}")
+            return fallback_chunks
 
     # Step 2a: Metadata Extraction
     @g.step
