@@ -30,11 +30,34 @@ class ImportanceLevel(int, Enum):
 # Chunking & Metadata Schemas
 # ============================================================================
 
+class TaxonomyNode(BaseModel):
+    """
+    A node in a hierarchical taxonomy tree.
+
+    Inspired by previous ETL project's rich taxonomy extraction.
+    """
+    name: str = Field(description="Name of the taxonomy node")
+    description: str | None = Field(
+        default=None,
+        description="Optional description of this taxonomy category"
+    )
+    importance: str = Field(
+        default="Medium",
+        description="Importance level: High, Medium, or Low"
+    )
+    category: str = Field(description="Category or domain of this node")
+    children: list["TaxonomyNode"] = Field(
+        default_factory=list,
+        description="Child nodes in the taxonomy hierarchy"
+    )
+
+
 class Chunk(BaseModel):
     """
     A document chunk with extracted metadata.
-    
+
     Used during ETL to store processed text segments.
+    Enhanced with keywords, categories, and taxonomies from previous project.
     """
     id: str = Field(description="Unique chunk identifier")
     text: str = Field(description="The chunk text content")
@@ -55,6 +78,19 @@ class Chunk(BaseModel):
     entities: list[str] = Field(
         default_factory=list,
         description="Named entities (orgs, laws, systems, etc.)"
+    )
+    # Enhanced metadata fields
+    keywords: list[str] = Field(
+        default_factory=list,
+        description="Extracted keywords for indexing and retrieval"
+    )
+    categories: list[str] = Field(
+        default_factory=list,
+        description="Classification categories for this chunk"
+    )
+    taxonomy: TaxonomyNode | None = Field(
+        default=None,
+        description="Hierarchical taxonomy structure for this chunk"
     )
 
     @field_validator("importance", mode="before")

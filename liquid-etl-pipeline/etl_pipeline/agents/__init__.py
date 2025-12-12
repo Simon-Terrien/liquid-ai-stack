@@ -4,7 +4,9 @@ ETL Pipeline Agents using Pydantic AI + LiquidAI models.
 
 Each agent uses an appropriately sized model per LFM2 recommendations:
 - chunking_agent: LFM2-1.2B (optimal for data extraction tasks)
-- metadata_agent: LFM2-1.2B (optimal for data extraction tasks)
+- metadata_agent: LFM2-1.2B (optimal for data extraction tasks with keywords)
+- classification_agent: LFM2-700M (fast multi-label classification)
+- taxonomy_agent: LFM2-1.2B (hierarchical topic extraction)
 - summary_agent: LFM2-700M (fast and efficient for summarization)
 - qa_agent: LFM2-1.2B (optimal for data extraction tasks)
 - validate_agent: LFM2-700M (fast quality filtering)
@@ -26,6 +28,20 @@ from .metadata_agent import (
     extract_metadata,
     extract_metadata_sync,
     get_metadata_agent,
+)
+from .classification_agent import (
+    ClassificationOutput,
+    classify_chunks,
+    classify_chunks_sync,
+    create_classification_agent,
+    get_classification_agent,
+)
+from .taxonomy_agent import (
+    TaxonomyOutput,
+    create_taxonomy_agent,
+    extract_taxonomies,
+    extract_taxonomies_sync,
+    get_taxonomy_agent,
 )
 from .qa_agent import (
     QAOutput,
@@ -62,6 +78,18 @@ __all__ = [
     "extract_metadata",
     "extract_metadata_sync",
     "MetadataOutput",
+    # Classification
+    "create_classification_agent",
+    "get_classification_agent",
+    "classify_chunks",
+    "classify_chunks_sync",
+    "ClassificationOutput",
+    # Taxonomy
+    "create_taxonomy_agent",
+    "get_taxonomy_agent",
+    "extract_taxonomies",
+    "extract_taxonomies_sync",
+    "TaxonomyOutput",
     # Summary
     "create_summary_agent",
     "get_summary_agent",

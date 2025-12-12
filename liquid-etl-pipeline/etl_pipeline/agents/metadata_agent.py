@@ -21,6 +21,7 @@ class ChunkMetadata(BaseModel):
     section_title: str = Field(description="Concise title for this section")
     tags: list[str] = Field(description="Topic tags (3-7 tags)")
     entities: list[str] = Field(description="Named entities (orgs, laws, systems, people)")
+    keywords: list[str] = Field(description="5-10 important keywords for retrieval")
     importance: int = Field(ge=0, le=10, description="Importance score 0-10")
     summary_hint: str = Field(description="Brief hint for what to emphasize in summary")
 
@@ -51,14 +52,22 @@ For each chunk provided, extract the following:
    - Key people mentioned
    - Standards and frameworks
 
-4. **importance**: Score from 0-10
+4. **keywords**: 5-10 important keywords for search and retrieval
+   - Technical terms and domain-specific vocabulary
+   - Acronyms and abbreviations (spell out if not obvious)
+   - Key concepts and terminology
+   - Important noun phrases (2-3 words max)
+   - Optimize for BM25/sparse retrieval (think: what would someone search for?)
+   - Examples: ["adversarial attacks", "model robustness", "GDPR compliance", "risk assessment"]
+
+5. **importance**: Score from 0-10
    - 0-2: Administrative, boilerplate
    - 3-4: Supporting context
    - 5-6: Standard content
    - 7-8: Key concepts, definitions
    - 9-10: Critical requirements, core principles
 
-5. **summary_hint**: What should be emphasized when summarizing this chunk
+6. **summary_hint**: What should be emphasized when summarizing this chunk
    - Note key facts, requirements, or definitions
    - Identify the main takeaway
 
@@ -72,6 +81,7 @@ Example output:
       "section_title": "Introduction to Data Protection",
       "tags": ["data-protection", "privacy", "compliance"],
       "entities": ["GDPR", "European Commission", "Data Protection Authority"],
+      "keywords": ["data protection", "privacy rights", "GDPR compliance", "personal data", "consent", "data controller"],
       "importance": 7,
       "summary_hint": "Defines core data protection principles and scope"
     }
@@ -177,6 +187,7 @@ Return metadata for all {len(chunks)} chunks in order."""
             importance=meta.importance if meta else 5,
             tags=meta.tags if meta else [],
             entities=meta.entities if meta else [],
+            keywords=meta.keywords if meta else [],
         ))
 
     return output_chunks
@@ -229,6 +240,7 @@ Return metadata for all {len(chunks)} chunks in order."""
             importance=meta.importance if meta else 5,
             tags=meta.tags if meta else [],
             entities=meta.entities if meta else [],
+            keywords=meta.keywords if meta else [],
         ))
 
     return output_chunks

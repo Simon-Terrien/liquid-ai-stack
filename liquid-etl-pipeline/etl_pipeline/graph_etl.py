@@ -25,6 +25,8 @@ from pydantic_graph.beta import GraphBuilder, StepContext
 from .agents import (
     chunk_document,
     extract_metadata,
+    classify_chunks,
+    extract_taxonomies,
     generate_qa_pairs,
     generate_summaries,
     validate_qa_pairs,
@@ -72,33 +74,37 @@ class ETLOutput:
 def build_etl_graph():
     """
     Build the ETL pipeline graph.
-    
+
     Graph structure:
-    
+
         start
           │
           ▼
         chunk
           │
-          ├──────────┬──────────┐
-          ▼          ▼          │
-       metadata   summary       │
-          │          │          │
-          └────┬─────┘          │
-               ▼                │
-              join              │
-               │                │
-               ▼                │
-           generate_qa ◄────────┘
-               │
-               ▼
-          validate_qa
-               │
-               ▼
-         build_ft_data
-               │
-               ▼
-             end
+          ▼
+       metadata (+ keywords)
+          │
+          ▼
+      classification
+          │
+          ▼
+       taxonomy
+          │
+          ▼
+       summary
+          │
+          ▼
+      generate_qa
+          │
+          ▼
+      validate_qa
+          │
+          ▼
+     build_ft_data
+          │
+          ▼
+        end
     """
     g = GraphBuilder(state_type=ETLState, output_type=ETLOutput)
 
@@ -148,11 +154,11 @@ def build_etl_graph():
             ctx.state.errors.append(f"Chunking agent failed, fallback used: {e}")
             return fallback_chunks
 
-    # Step 2a: Metadata Extraction
+    # Step 2: Metadata Extraction (now includes keywords)
     @g.step
     async def extract_metadata_step(ctx: StepContext[ETLState, None, list[str]]) -> list[Chunk]:
-        """Extract metadata from chunks."""
-        logger.info("Extracting metadata...")
+        """Extract metadata (including keywords) from chunks."""
+        logger.info("Extracting metadata with keywords...")
 
         try:
             chunks = await extract_metadata(
@@ -167,7 +173,53 @@ def build_etl_graph():
             logger.error(f"Metadata extraction failed: {e}")
             raise
 
-    # Step 2b: Summary Generation (parallel with metadata)
+    # Step 3: Classification
+    @g.step
+    async def classify_chunks_step(ctx: StepContext[ETLState, None, list[Chunk]]) -> list[Chunk]:
+        """Classify chunks into categories."""
+        logger.info("Classifying chunks...")
+
+        try:
+            classifications = await classify_chunks(ctx.inputs)
+
+            # Update chunks with classification results
+            for classification in classifications.classifications:
+                if classification.chunk_index < len(ctx.state.chunks):
+                    chunk = ctx.state.chunks[classification.chunk_index]
+                    chunk.categories = classification.categories
+
+            logger.info(f"Classified {len(classifications.classifications)} chunks")
+            return ctx.state.chunks
+        except Exception as e:
+            ctx.state.errors.append(f"Classification failed: {e}")
+            logger.warning(f"Classification failed, continuing without categories: {e}")
+            # Don't raise - continue pipeline without categories
+            return ctx.inputs
+
+    # Step 4: Taxonomy Extraction
+    @g.step
+    async def extract_taxonomy_step(ctx: StepContext[ETLState, None, list[Chunk]]) -> list[Chunk]:
+        """Extract hierarchical taxonomies from chunks."""
+        logger.info("Extracting taxonomies...")
+
+        try:
+            taxonomies = await extract_taxonomies(ctx.inputs)
+
+            # Update chunks with taxonomy results
+            for taxonomy in taxonomies.taxonomies:
+                if taxonomy.chunk_index < len(ctx.state.chunks):
+                    chunk = ctx.state.chunks[taxonomy.chunk_index]
+                    chunk.taxonomy = taxonomy.taxonomy
+
+            logger.info(f"Extracted taxonomies for {len(taxonomies.taxonomies)} chunks")
+            return ctx.state.chunks
+        except Exception as e:
+            ctx.state.errors.append(f"Taxonomy extraction failed: {e}")
+            logger.warning(f"Taxonomy extraction failed, continuing without taxonomies: {e}")
+            # Don't raise - continue pipeline without taxonomies
+            return ctx.inputs
+
+    # Step 5: Summary Generation
     @g.step
     async def generate_summaries_step(ctx: StepContext[ETLState, None, list[Chunk]]) -> list[ChunkSummary]:
         """Generate summaries for chunks."""
@@ -185,7 +237,7 @@ def build_etl_graph():
             logger.error(f"Summary generation failed: {e}")
             raise
 
-    # Step 3: QA Generation
+    # Step 6: QA Generation
     @g.step
     async def generate_qa_step(ctx: StepContext[ETLState, None, list[ChunkSummary]]) -> list[QAPair]:
         """Generate QA pairs for fine-tuning."""
@@ -202,7 +254,7 @@ def build_etl_graph():
             logger.error(f"QA generation failed: {e}")
             raise
 
-    # Step 4: QA Validation
+    # Step 7: QA Validation
     @g.step
     async def validate_qa_step(ctx: StepContext[ETLState, None, list[QAPair]]) -> list[QAPair]:
         """Validate and filter QA pairs."""
@@ -224,7 +276,7 @@ def build_etl_graph():
             logger.error(f"QA validation failed: {e}")
             raise
 
-    # Step 5: Build Fine-tuning Dataset
+    # Step 8: Build Fine-tuning Dataset
     @g.step
     async def build_ft_data_step(ctx: StepContext[ETLState, None, list[QAPair]]) -> ETLOutput:
         """Build fine-tuning dataset from validated QA pairs."""
@@ -245,7 +297,11 @@ def build_etl_graph():
                         "source": chunk.source_path,
                         "quality_score": qa.quality_score,
                         "section": chunk.section_title,
+                        "importance": chunk.importance,
                         "tags": chunk.tags,
+                        "keywords": chunk.keywords,
+                        "categories": chunk.categories,
+                        "entities": chunk.entities,
                     }
                 ))
 
@@ -267,11 +323,17 @@ def build_etl_graph():
         # Start -> Chunking
         g.edge_from(g.start_node).to(chunk_document_step),
 
-        # Chunking -> Metadata
+        # Chunking -> Metadata (+ keywords)
         g.edge_from(chunk_document_step).to(extract_metadata_step),
 
-        # Metadata -> Summaries
-        g.edge_from(extract_metadata_step).to(generate_summaries_step),
+        # Metadata -> Classification
+        g.edge_from(extract_metadata_step).to(classify_chunks_step),
+
+        # Classification -> Taxonomy
+        g.edge_from(classify_chunks_step).to(extract_taxonomy_step),
+
+        # Taxonomy -> Summaries
+        g.edge_from(extract_taxonomy_step).to(generate_summaries_step),
 
         # Summaries -> QA Generation
         g.edge_from(generate_summaries_step).to(generate_qa_step),
