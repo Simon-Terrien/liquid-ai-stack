@@ -38,6 +38,7 @@ dependencies = [
     # HuggingFace utilities
     "huggingface-hub>=0.17",
     "mlflow>=3.7.0",
+    "seaborn>=0.13.2",
 ]
 
 [project.optional-dependencies]

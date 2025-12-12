@@ -1,16 +1,10 @@
 {
   "source": "/home/lupise/liquid-ai-stack/liquid-ai-stack/liquid-shared-core/data/raw/ENISA Research and Innovation - AI and Cyber Insurance.pdf",
-  "processed_at": "2025-12-11T23:15:03.724793",
-  "stats": {
-    "chunking_strategy": "agent",
-    "num_chunks": 5,
-    "num_qa_generated": 3,
-    "num_qa_validated": 2,
-    "qa_pass_rate": 0.6666666666666666,
-    "num_ft_samples": 2
-  },
-  "num_chunks": 5,
-  "num_summaries": 5,
-  "num_qa_pairs": 2,
-  "num_ft_samples": 2
+  "processed_at": "2025-12-12T22:29:46.540677",
+  "num_chunks": 14,
+  "avg_chunk_size": 14404.785714285714,
+  "max_chunk_size": 16001,
+  "min_chunk_size": 12259,
+  "total_chars": 113117,
+  "qa_pairs": 0
 }

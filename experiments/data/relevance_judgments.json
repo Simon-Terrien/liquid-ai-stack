@@ -1,0 +1,1822 @@
+{
+  "q001": {
+    "query": "What are adversarial attacks on machine learning models?",
+    "category": "AI/ML Security",
+    "expected_topics": [
+      "adversarial attacks",
+      "model security",
+      "AI vulnerabilities"
+    ],
+    "judgments": [
+      {
+        "doc_id": "11f3e551-84a3-4af0-aaa1-64a756f6d373",
+        "relevance": 2,
+        "reasoning": "High similarity score (0.815)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.8150449991226196
+      },
+      {
+        "doc_id": "38345c0a-c695-498e-b212-be5660b8d1c5",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.690)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6901045441627502
+      },
+      {
+        "doc_id": "250600f5-d9b5-4ee3-8387-d13b6b5dc6ac",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.654)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6535421311855316
+      },
+      {
+        "doc_id": "e6cbc15e-d858-46ac-927a-976f0fc0d00b",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.650)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6499760746955872
+      },
+      {
+        "doc_id": "b964d123-e546-4ffc-b348-73687c1cda7d",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.638)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6381840109825134
+      },
+      {
+        "doc_id": "558140ef-37d6-4f28-b87c-f8d849f6f5a8",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.622)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6222516894340515
+      },
+      {
+        "doc_id": "5c39a2a7-f098-48db-a062-e440a3c0bed4",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.615)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6145822107791901
+      },
+      {
+        "doc_id": "521f6358-8738-47fb-abd3-efb57cd74da8",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.586)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.5863851308822632
+      },
+      {
+        "doc_id": "834cc5c7-72b0-4328-a628-6377e8723695",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.581)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.5805156230926514
+      },
+      {
+        "doc_id": "9b5fd495-5666-4516-ab9a-83182e2a77ae",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.581)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.5805156230926514
+      }
+    ]
+  },
+  "q002": {
+    "query": "How to defend against model poisoning?",
+    "category": "AI/ML Security",
+    "expected_topics": [
+      "model poisoning",
+      "defense strategies",
+      "data validation"
+    ],
+    "judgments": [
+      {
+        "doc_id": "11f3e551-84a3-4af0-aaa1-64a756f6d373",
+        "relevance": 2,
+        "reasoning": "High similarity score (0.787)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7867037057876587
+      },
+      {
+        "doc_id": "38345c0a-c695-498e-b212-be5660b8d1c5",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.685)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6847917437553406
+      },
+      {
+        "doc_id": "250600f5-d9b5-4ee3-8387-d13b6b5dc6ac",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.654)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6543774008750916
+      },
+      {
+        "doc_id": "5c39a2a7-f098-48db-a062-e440a3c0bed4",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.649)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6494770646095276
+      },
+      {
+        "doc_id": "521f6358-8738-47fb-abd3-efb57cd74da8",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.647)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6467317342758179
+      },
+      {
+        "doc_id": "558140ef-37d6-4f28-b87c-f8d849f6f5a8",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.640)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6398641467094421
+      },
+      {
+        "doc_id": "e6cbc15e-d858-46ac-927a-976f0fc0d00b",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.634)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.633761078119278
+      },
+      {
+        "doc_id": "b964d123-e546-4ffc-b348-73687c1cda7d",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.633)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6331157684326172
+      },
+      {
+        "doc_id": "16c40e72-e28a-4918-8008-3158c8fc0c0c",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.622)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6223818063735962
+      },
+      {
+        "doc_id": "4465ec4f-b202-45d8-9acb-9db018135ec8",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.601)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6008510589599609
+      }
+    ]
+  },
+  "q003": {
+    "query": "What is adversarial training?",
+    "category": "AI/ML Security",
+    "expected_topics": [
+      "adversarial training",
+      "model robustness",
+      "defense techniques"
+    ],
+    "judgments": [
+      {
+        "doc_id": "11f3e551-84a3-4af0-aaa1-64a756f6d373",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.685)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6853211522102356
+      },
+      {
+        "doc_id": "e6cbc15e-d858-46ac-927a-976f0fc0d00b",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.643)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6429235339164734
+      },
+      {
+        "doc_id": "38345c0a-c695-498e-b212-be5660b8d1c5",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.623)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6230946481227875
+      },
+      {
+        "doc_id": "250600f5-d9b5-4ee3-8387-d13b6b5dc6ac",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.615)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6153725385665894
+      },
+      {
+        "doc_id": "b964d123-e546-4ffc-b348-73687c1cda7d",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.601)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6008446216583252
+      },
+      {
+        "doc_id": "834cc5c7-72b0-4328-a628-6377e8723695",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.595)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.5954586863517761
+      },
+      {
+        "doc_id": "9b5fd495-5666-4516-ab9a-83182e2a77ae",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.595)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.5954586863517761
+      },
+      {
+        "doc_id": "558140ef-37d6-4f28-b87c-f8d849f6f5a8",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.594)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.5943187177181244
+      },
+      {
+        "doc_id": "4444e9ac-3619-4c59-8d7c-76f3f6d1de35",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.571)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.5712003707885742
+      },
+      {
+        "doc_id": "f0d42e1c-946f-4346-a1a1-aa0455c78a9e",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.565)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.5648281276226044
+      }
+    ]
+  },
+  "q004": {
+    "query": "Model robustness techniques",
+    "category": "Technical Controls",
+    "expected_topics": [
+      "model robustness",
+      "defensive measures",
+      "AI security"
+    ],
+    "judgments": [
+      {
+        "doc_id": "11f3e551-84a3-4af0-aaa1-64a756f6d373",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.736)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7359138131141663
+      },
+      {
+        "doc_id": "38345c0a-c695-498e-b212-be5660b8d1c5",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.677)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6770098507404327
+      },
+      {
+        "doc_id": "5c39a2a7-f098-48db-a062-e440a3c0bed4",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.669)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6694490909576416
+      },
+      {
+        "doc_id": "521f6358-8738-47fb-abd3-efb57cd74da8",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.662)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6622982323169708
+      },
+      {
+        "doc_id": "e6cbc15e-d858-46ac-927a-976f0fc0d00b",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.631)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6312035918235779
+      },
+      {
+        "doc_id": "250600f5-d9b5-4ee3-8387-d13b6b5dc6ac",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.625)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6246728301048279
+      },
+      {
+        "doc_id": "16c40e72-e28a-4918-8008-3158c8fc0c0c",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.604)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6044652462005615
+      },
+      {
+        "doc_id": "4465ec4f-b202-45d8-9acb-9db018135ec8",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.594)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.5940708518028259
+      },
+      {
+        "doc_id": "b964d123-e546-4ffc-b348-73687c1cda7d",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.588)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.5880503952503204
+      },
+      {
+        "doc_id": "558140ef-37d6-4f28-b87c-f8d849f6f5a8",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.575)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.5751250386238098
+      }
+    ]
+  },
+  "q005": {
+    "query": "Security risks in production AI systems",
+    "category": "Risk Management",
+    "expected_topics": [
+      "production security",
+      "AI risks",
+      "operational security"
+    ],
+    "judgments": [
+      {
+        "doc_id": "11f3e551-84a3-4af0-aaa1-64a756f6d373",
+        "relevance": 2,
+        "reasoning": "High similarity score (0.829)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.829179048538208
+      },
+      {
+        "doc_id": "558140ef-37d6-4f28-b87c-f8d849f6f5a8",
+        "relevance": 2,
+        "reasoning": "High similarity score (0.794)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.793945699930191
+      },
+      {
+        "doc_id": "b964d123-e546-4ffc-b348-73687c1cda7d",
+        "relevance": 2,
+        "reasoning": "High similarity score (0.764)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7644511461257935
+      },
+      {
+        "doc_id": "250600f5-d9b5-4ee3-8387-d13b6b5dc6ac",
+        "relevance": 2,
+        "reasoning": "High similarity score (0.757)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7573981583118439
+      },
+      {
+        "doc_id": "e6cbc15e-d858-46ac-927a-976f0fc0d00b",
+        "relevance": 2,
+        "reasoning": "High similarity score (0.757)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7570365071296692
+      },
+      {
+        "doc_id": "38345c0a-c695-498e-b212-be5660b8d1c5",
+        "relevance": 2,
+        "reasoning": "High similarity score (0.753)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7525577247142792
+      },
+      {
+        "doc_id": "5c39a2a7-f098-48db-a062-e440a3c0bed4",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.669)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6685954332351685
+      },
+      {
+        "doc_id": "16c40e72-e28a-4918-8008-3158c8fc0c0c",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.660)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6595337986946106
+      },
+      {
+        "doc_id": "f0d42e1c-946f-4346-a1a1-aa0455c78a9e",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.651)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6508395969867706
+      },
+      {
+        "doc_id": "4444e9ac-3619-4c59-8d7c-76f3f6d1de35",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.649)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6486113667488098
+      }
+    ]
+  },
+  "q006": {
+    "query": "GDPR requirements for AI systems",
+    "category": "Data Protection",
+    "expected_topics": [
+      "GDPR",
+      "AI compliance",
+      "data protection"
+    ],
+    "judgments": [
+      {
+        "doc_id": "558140ef-37d6-4f28-b87c-f8d849f6f5a8",
+        "relevance": 2,
+        "reasoning": "High similarity score (0.807)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.807119756937027
+      },
+      {
+        "doc_id": "250600f5-d9b5-4ee3-8387-d13b6b5dc6ac",
+        "relevance": 2,
+        "reasoning": "High similarity score (0.801)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.8013374507427216
+      },
+      {
+        "doc_id": "38345c0a-c695-498e-b212-be5660b8d1c5",
+        "relevance": 2,
+        "reasoning": "High similarity score (0.775)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7747098505496979
+      },
+      {
+        "doc_id": "11f3e551-84a3-4af0-aaa1-64a756f6d373",
+        "relevance": 2,
+        "reasoning": "High similarity score (0.758)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7579695284366608
+      },
+      {
+        "doc_id": "b964d123-e546-4ffc-b348-73687c1cda7d",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.743)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7428026497364044
+      },
+      {
+        "doc_id": "16c40e72-e28a-4918-8008-3158c8fc0c0c",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.739)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7389165461063385
+      },
+      {
+        "doc_id": "e6cbc15e-d858-46ac-927a-976f0fc0d00b",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.697)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6973918676376343
+      },
+      {
+        "doc_id": "0f2949f6-26a4-4363-9cec-511af3d2aefd",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.665)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6649143993854523
+      },
+      {
+        "doc_id": "2bf495d2-a2a6-49a4-a154-a3062e993d40",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.663)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.662837952375412
+      },
+      {
+        "doc_id": "f0d42e1c-946f-4346-a1a1-aa0455c78a9e",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.658)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6582179069519043
+      }
+    ]
+  },
+  "q007": {
+    "query": "Data protection measures for machine learning",
+    "category": "Data Protection",
+    "expected_topics": [
+      "data protection",
+      "ML privacy",
+      "security measures"
+    ],
+    "judgments": [
+      {
+        "doc_id": "11f3e551-84a3-4af0-aaa1-64a756f6d373",
+        "relevance": 2,
+        "reasoning": "High similarity score (0.851)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.8512078821659088
+      },
+      {
+        "doc_id": "38345c0a-c695-498e-b212-be5660b8d1c5",
+        "relevance": 2,
+        "reasoning": "High similarity score (0.793)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.793226569890976
+      },
+      {
+        "doc_id": "250600f5-d9b5-4ee3-8387-d13b6b5dc6ac",
+        "relevance": 2,
+        "reasoning": "High similarity score (0.775)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7749363780021667
+      },
+      {
+        "doc_id": "16c40e72-e28a-4918-8008-3158c8fc0c0c",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.747)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7469782531261444
+      },
+      {
+        "doc_id": "558140ef-37d6-4f28-b87c-f8d849f6f5a8",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.694)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6942929625511169
+      },
+      {
+        "doc_id": "e6cbc15e-d858-46ac-927a-976f0fc0d00b",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.671)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6714575886726379
+      },
+      {
+        "doc_id": "521f6358-8738-47fb-abd3-efb57cd74da8",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.660)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6601118445396423
+      },
+      {
+        "doc_id": "5c39a2a7-f098-48db-a062-e440a3c0bed4",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.659)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6592705845832825
+      },
+      {
+        "doc_id": "b964d123-e546-4ffc-b348-73687c1cda7d",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.652)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6522447466850281
+      },
+      {
+        "doc_id": "4465ec4f-b202-45d8-9acb-9db018135ec8",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.613)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6127244830131531
+      }
+    ]
+  },
+  "q008": {
+    "query": "Privacy regulations for AI",
+    "category": "Governance & Policy",
+    "expected_topics": [
+      "privacy",
+      "regulations",
+      "AI governance"
+    ],
+    "judgments": [
+      {
+        "doc_id": "558140ef-37d6-4f28-b87c-f8d849f6f5a8",
+        "relevance": 2,
+        "reasoning": "High similarity score (0.772)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7724755704402924
+      },
+      {
+        "doc_id": "250600f5-d9b5-4ee3-8387-d13b6b5dc6ac",
+        "relevance": 2,
+        "reasoning": "High similarity score (0.753)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.75308558344841
+      },
+      {
+        "doc_id": "11f3e551-84a3-4af0-aaa1-64a756f6d373",
+        "relevance": 2,
+        "reasoning": "High similarity score (0.752)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7522704005241394
+      },
+      {
+        "doc_id": "16c40e72-e28a-4918-8008-3158c8fc0c0c",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.746)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7458409667015076
+      },
+      {
+        "doc_id": "38345c0a-c695-498e-b212-be5660b8d1c5",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.736)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7355282306671143
+      },
+      {
+        "doc_id": "b964d123-e546-4ffc-b348-73687c1cda7d",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.712)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7117791771888733
+      },
+      {
+        "doc_id": "e6cbc15e-d858-46ac-927a-976f0fc0d00b",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.657)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6570563018321991
+      },
+      {
+        "doc_id": "0f2949f6-26a4-4363-9cec-511af3d2aefd",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.639)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.638867974281311
+      },
+      {
+        "doc_id": "4444e9ac-3619-4c59-8d7c-76f3f6d1de35",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.633)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.633169561624527
+      },
+      {
+        "doc_id": "2bf495d2-a2a6-49a4-a154-a3062e993d40",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.632)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6323428750038147
+      }
+    ]
+  },
+  "q009": {
+    "query": "Personal data handling in AI",
+    "category": "Data Protection",
+    "expected_topics": [
+      "personal data",
+      "AI privacy",
+      "data handling"
+    ],
+    "judgments": [
+      {
+        "doc_id": "250600f5-d9b5-4ee3-8387-d13b6b5dc6ac",
+        "relevance": 2,
+        "reasoning": "High similarity score (0.753)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7530011534690857
+      },
+      {
+        "doc_id": "38345c0a-c695-498e-b212-be5660b8d1c5",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.714)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7142567932605743
+      },
+      {
+        "doc_id": "11f3e551-84a3-4af0-aaa1-64a756f6d373",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.710)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7099310755729675
+      },
+      {
+        "doc_id": "558140ef-37d6-4f28-b87c-f8d849f6f5a8",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.706)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7059215307235718
+      },
+      {
+        "doc_id": "16c40e72-e28a-4918-8008-3158c8fc0c0c",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.702)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.702034056186676
+      },
+      {
+        "doc_id": "e6cbc15e-d858-46ac-927a-976f0fc0d00b",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.690)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6896780729293823
+      },
+      {
+        "doc_id": "b964d123-e546-4ffc-b348-73687c1cda7d",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.684)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6835507154464722
+      },
+      {
+        "doc_id": "5c39a2a7-f098-48db-a062-e440a3c0bed4",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.606)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6062621772289276
+      },
+      {
+        "doc_id": "0f2949f6-26a4-4363-9cec-511af3d2aefd",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.598)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.5983547270298004
+      },
+      {
+        "doc_id": "4444e9ac-3619-4c59-8d7c-76f3f6d1de35",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.588)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.5877978503704071
+      }
+    ]
+  },
+  "q010": {
+    "query": "GDPR compliance requirements",
+    "category": "Governance & Policy",
+    "expected_topics": [
+      "GDPR",
+      "compliance",
+      "regulatory requirements"
+    ],
+    "judgments": [
+      {
+        "doc_id": "16c40e72-e28a-4918-8008-3158c8fc0c0c",
+        "relevance": 2,
+        "reasoning": "High similarity score (0.763)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7633998394012451
+      },
+      {
+        "doc_id": "250600f5-d9b5-4ee3-8387-d13b6b5dc6ac",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.721)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7212361097335815
+      },
+      {
+        "doc_id": "4444e9ac-3619-4c59-8d7c-76f3f6d1de35",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.666)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6661505401134491
+      },
+      {
+        "doc_id": "2bf495d2-a2a6-49a4-a154-a3062e993d40",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.666)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6656323075294495
+      },
+      {
+        "doc_id": "558140ef-37d6-4f28-b87c-f8d849f6f5a8",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.656)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6555805802345276
+      },
+      {
+        "doc_id": "f0d42e1c-946f-4346-a1a1-aa0455c78a9e",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.653)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6532337963581085
+      },
+      {
+        "doc_id": "0f2949f6-26a4-4363-9cec-511af3d2aefd",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.651)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.651385486125946
+      },
+      {
+        "doc_id": "480c6ac4-ba41-45a0-a761-ac867a02412c",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.647)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6469595432281494
+      },
+      {
+        "doc_id": "834cc5c7-72b0-4328-a628-6377e8723695",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.643)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6430984139442444
+      },
+      {
+        "doc_id": "9b5fd495-5666-4516-ab9a-83182e2a77ae",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.643)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6430984139442444
+      }
+    ]
+  },
+  "q011": {
+    "query": "Cyber insurance for AI systems",
+    "category": "Cyber Insurance",
+    "expected_topics": [
+      "cyber insurance",
+      "AI coverage",
+      "risk insurance"
+    ],
+    "judgments": [
+      {
+        "doc_id": "250600f5-d9b5-4ee3-8387-d13b6b5dc6ac",
+        "relevance": 2,
+        "reasoning": "High similarity score (0.849)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.8489744663238525
+      },
+      {
+        "doc_id": "38345c0a-c695-498e-b212-be5660b8d1c5",
+        "relevance": 2,
+        "reasoning": "High similarity score (0.826)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.82609423995018
+      },
+      {
+        "doc_id": "558140ef-37d6-4f28-b87c-f8d849f6f5a8",
+        "relevance": 2,
+        "reasoning": "High similarity score (0.818)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.8183720707893372
+      },
+      {
+        "doc_id": "521f6358-8738-47fb-abd3-efb57cd74da8",
+        "relevance": 2,
+        "reasoning": "High similarity score (0.776)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7764652371406555
+      },
+      {
+        "doc_id": "11f3e551-84a3-4af0-aaa1-64a756f6d373",
+        "relevance": 2,
+        "reasoning": "High similarity score (0.769)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7692962288856506
+      },
+      {
+        "doc_id": "b964d123-e546-4ffc-b348-73687c1cda7d",
+        "relevance": 2,
+        "reasoning": "High similarity score (0.769)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7686153948307037
+      },
+      {
+        "doc_id": "5c39a2a7-f098-48db-a062-e440a3c0bed4",
+        "relevance": 2,
+        "reasoning": "High similarity score (0.761)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7606377303600311
+      },
+      {
+        "doc_id": "4465ec4f-b202-45d8-9acb-9db018135ec8",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.740)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7401531934738159
+      },
+      {
+        "doc_id": "e6cbc15e-d858-46ac-927a-976f0fc0d00b",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.739)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7386379539966583
+      },
+      {
+        "doc_id": "0f2949f6-26a4-4363-9cec-511af3d2aefd",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.726)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7262056171894073
+      }
+    ]
+  },
+  "q012": {
+    "query": "Risk assessment for AI insurance",
+    "category": "Cyber Insurance",
+    "expected_topics": [
+      "risk assessment",
+      "insurance",
+      "AI risks"
+    ],
+    "judgments": [
+      {
+        "doc_id": "250600f5-d9b5-4ee3-8387-d13b6b5dc6ac",
+        "relevance": 2,
+        "reasoning": "High similarity score (0.803)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.8026038408279419
+      },
+      {
+        "doc_id": "38345c0a-c695-498e-b212-be5660b8d1c5",
+        "relevance": 2,
+        "reasoning": "High similarity score (0.798)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7978531122207642
+      },
+      {
+        "doc_id": "521f6358-8738-47fb-abd3-efb57cd74da8",
+        "relevance": 2,
+        "reasoning": "High similarity score (0.775)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7753061950206757
+      },
+      {
+        "doc_id": "5c39a2a7-f098-48db-a062-e440a3c0bed4",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.743)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7429731488227844
+      },
+      {
+        "doc_id": "4465ec4f-b202-45d8-9acb-9db018135ec8",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.742)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7416707277297974
+      },
+      {
+        "doc_id": "558140ef-37d6-4f28-b87c-f8d849f6f5a8",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.729)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.728823184967041
+      },
+      {
+        "doc_id": "e6cbc15e-d858-46ac-927a-976f0fc0d00b",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.705)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.704895555973053
+      },
+      {
+        "doc_id": "11f3e551-84a3-4af0-aaa1-64a756f6d373",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.682)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6818485856056213
+      },
+      {
+        "doc_id": "b964d123-e546-4ffc-b348-73687c1cda7d",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.671)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6710475981235504
+      },
+      {
+        "doc_id": "16c40e72-e28a-4918-8008-3158c8fc0c0c",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.663)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6634227931499481
+      }
+    ]
+  },
+  "q013": {
+    "query": "Insurance coverage for AI incidents",
+    "category": "Cyber Insurance",
+    "expected_topics": [
+      "insurance coverage",
+      "AI incidents",
+      "claims"
+    ],
+    "judgments": [
+      {
+        "doc_id": "250600f5-d9b5-4ee3-8387-d13b6b5dc6ac",
+        "relevance": 2,
+        "reasoning": "High similarity score (0.790)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7898403704166412
+      },
+      {
+        "doc_id": "38345c0a-c695-498e-b212-be5660b8d1c5",
+        "relevance": 2,
+        "reasoning": "High similarity score (0.763)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7631265223026276
+      },
+      {
+        "doc_id": "558140ef-37d6-4f28-b87c-f8d849f6f5a8",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.747)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7471671998500824
+      },
+      {
+        "doc_id": "4465ec4f-b202-45d8-9acb-9db018135ec8",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.731)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.730767548084259
+      },
+      {
+        "doc_id": "521f6358-8738-47fb-abd3-efb57cd74da8",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.726)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7257000207901001
+      },
+      {
+        "doc_id": "5c39a2a7-f098-48db-a062-e440a3c0bed4",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.695)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6950790882110596
+      },
+      {
+        "doc_id": "b964d123-e546-4ffc-b348-73687c1cda7d",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.693)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.692627489566803
+      },
+      {
+        "doc_id": "11f3e551-84a3-4af0-aaa1-64a756f6d373",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.684)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6840584874153137
+      },
+      {
+        "doc_id": "e6cbc15e-d858-46ac-927a-976f0fc0d00b",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.681)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6808335781097412
+      },
+      {
+        "doc_id": "16c40e72-e28a-4918-8008-3158c8fc0c0c",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.674)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6738528609275818
+      }
+    ]
+  },
+  "q014": {
+    "query": "Input validation for ML models",
+    "category": "Technical Controls",
+    "expected_topics": [
+      "input validation",
+      "data sanitization",
+      "ML security"
+    ],
+    "judgments": [
+      {
+        "doc_id": "11f3e551-84a3-4af0-aaa1-64a756f6d373",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.718)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.718389093875885
+      },
+      {
+        "doc_id": "38345c0a-c695-498e-b212-be5660b8d1c5",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.699)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6989042162895203
+      },
+      {
+        "doc_id": "250600f5-d9b5-4ee3-8387-d13b6b5dc6ac",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.612)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6118553578853607
+      },
+      {
+        "doc_id": "e6cbc15e-d858-46ac-927a-976f0fc0d00b",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.612)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6115492880344391
+      },
+      {
+        "doc_id": "5c39a2a7-f098-48db-a062-e440a3c0bed4",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.601)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6013400256633759
+      },
+      {
+        "doc_id": "b964d123-e546-4ffc-b348-73687c1cda7d",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.598)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.5983372330665588
+      },
+      {
+        "doc_id": "16c40e72-e28a-4918-8008-3158c8fc0c0c",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.597)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.597297877073288
+      },
+      {
+        "doc_id": "521f6358-8738-47fb-abd3-efb57cd74da8",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.580)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.5800835490226746
+      },
+      {
+        "doc_id": "558140ef-37d6-4f28-b87c-f8d849f6f5a8",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.574)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.5742659866809845
+      },
+      {
+        "doc_id": "0f2949f6-26a4-4363-9cec-511af3d2aefd",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.552)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.5523492991924286
+      }
+    ]
+  },
+  "q015": {
+    "query": "Runtime monitoring for AI systems",
+    "category": "Technical Controls",
+    "expected_topics": [
+      "runtime monitoring",
+      "system monitoring",
+      "AI operations"
+    ],
+    "judgments": [
+      {
+        "doc_id": "11f3e551-84a3-4af0-aaa1-64a756f6d373",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.694)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6940709054470062
+      },
+      {
+        "doc_id": "e6cbc15e-d858-46ac-927a-976f0fc0d00b",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.679)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.679297685623169
+      },
+      {
+        "doc_id": "b964d123-e546-4ffc-b348-73687c1cda7d",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.677)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6765711009502411
+      },
+      {
+        "doc_id": "558140ef-37d6-4f28-b87c-f8d849f6f5a8",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.671)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6706312894821167
+      },
+      {
+        "doc_id": "38345c0a-c695-498e-b212-be5660b8d1c5",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.654)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6537398099899292
+      },
+      {
+        "doc_id": "250600f5-d9b5-4ee3-8387-d13b6b5dc6ac",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.637)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6372675895690918
+      },
+      {
+        "doc_id": "f0d42e1c-946f-4346-a1a1-aa0455c78a9e",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.588)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.5881058871746063
+      },
+      {
+        "doc_id": "5c39a2a7-f098-48db-a062-e440a3c0bed4",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.585)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.5852138102054596
+      },
+      {
+        "doc_id": "4444e9ac-3619-4c59-8d7c-76f3f6d1de35",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.576)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.5757786333560944
+      },
+      {
+        "doc_id": "834cc5c7-72b0-4328-a628-6377e8723695",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.574)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.57413250207901
+      }
+    ]
+  },
+  "q016": {
+    "query": "Anomaly detection in production",
+    "category": "Technical Controls",
+    "expected_topics": [
+      "anomaly detection",
+      "production monitoring",
+      "security monitoring"
+    ],
+    "judgments": [
+      {
+        "doc_id": "e6cbc15e-d858-46ac-927a-976f0fc0d00b",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.653)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6533721089363098
+      },
+      {
+        "doc_id": "250600f5-d9b5-4ee3-8387-d13b6b5dc6ac",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.647)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6473120450973511
+      },
+      {
+        "doc_id": "4465ec4f-b202-45d8-9acb-9db018135ec8",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.643)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6428208947181702
+      },
+      {
+        "doc_id": "0f78ba1b-7f8b-42f3-b677-5a0a803c4420",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.635)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6349923610687256
+      },
+      {
+        "doc_id": "521f6358-8738-47fb-abd3-efb57cd74da8",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.631)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6310698390007019
+      },
+      {
+        "doc_id": "5c39a2a7-f098-48db-a062-e440a3c0bed4",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.624)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6243011653423309
+      },
+      {
+        "doc_id": "38345c0a-c695-498e-b212-be5660b8d1c5",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.622)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6219803094863892
+      },
+      {
+        "doc_id": "f0d42e1c-946f-4346-a1a1-aa0455c78a9e",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.618)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.618051677942276
+      },
+      {
+        "doc_id": "4444e9ac-3619-4c59-8d7c-76f3f6d1de35",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.612)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6123697459697723
+      },
+      {
+        "doc_id": "834cc5c7-72b0-4328-a628-6377e8723695",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.609)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6092076301574707
+      }
+    ]
+  },
+  "q017": {
+    "query": "Model ensemble techniques",
+    "category": "AI/ML Security",
+    "expected_topics": [
+      "model ensembles",
+      "robustness",
+      "ML techniques"
+    ],
+    "judgments": [
+      {
+        "doc_id": "38345c0a-c695-498e-b212-be5660b8d1c5",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.643)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6427947282791138
+      },
+      {
+        "doc_id": "11f3e551-84a3-4af0-aaa1-64a756f6d373",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.623)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6227259635925293
+      },
+      {
+        "doc_id": "5c39a2a7-f098-48db-a062-e440a3c0bed4",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.613)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6127332448959351
+      },
+      {
+        "doc_id": "e6cbc15e-d858-46ac-927a-976f0fc0d00b",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.611)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6108448207378387
+      },
+      {
+        "doc_id": "521f6358-8738-47fb-abd3-efb57cd74da8",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.600)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6004514694213867
+      },
+      {
+        "doc_id": "250600f5-d9b5-4ee3-8387-d13b6b5dc6ac",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.589)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.5891830921173096
+      },
+      {
+        "doc_id": "b964d123-e546-4ffc-b348-73687c1cda7d",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.588)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.588171124458313
+      },
+      {
+        "doc_id": "558140ef-37d6-4f28-b87c-f8d849f6f5a8",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.550)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.5499711334705353
+      },
+      {
+        "doc_id": "4465ec4f-b202-45d8-9acb-9db018135ec8",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.548)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.5479266941547394
+      },
+      {
+        "doc_id": "834cc5c7-72b0-4328-a628-6377e8723695",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.544)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.5441138446331024
+      }
+    ]
+  },
+  "q018": {
+    "query": "Threat intelligence for AI",
+    "category": "Threat Intelligence",
+    "expected_topics": [
+      "threat intelligence",
+      "AI threats",
+      "security intelligence"
+    ],
+    "judgments": [
+      {
+        "doc_id": "e6cbc15e-d858-46ac-927a-976f0fc0d00b",
+        "relevance": 2,
+        "reasoning": "High similarity score (0.875)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.874985933303833
+      },
+      {
+        "doc_id": "b964d123-e546-4ffc-b348-73687c1cda7d",
+        "relevance": 2,
+        "reasoning": "High similarity score (0.786)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7863033711910248
+      },
+      {
+        "doc_id": "558140ef-37d6-4f28-b87c-f8d849f6f5a8",
+        "relevance": 2,
+        "reasoning": "High similarity score (0.752)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7515561878681183
+      },
+      {
+        "doc_id": "38345c0a-c695-498e-b212-be5660b8d1c5",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.750)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7495286166667938
+      },
+      {
+        "doc_id": "250600f5-d9b5-4ee3-8387-d13b6b5dc6ac",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.733)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7331116199493408
+      },
+      {
+        "doc_id": "11f3e551-84a3-4af0-aaa1-64a756f6d373",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.695)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6952391564846039
+      },
+      {
+        "doc_id": "0f2949f6-26a4-4363-9cec-511af3d2aefd",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.679)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6790009140968323
+      },
+      {
+        "doc_id": "5c39a2a7-f098-48db-a062-e440a3c0bed4",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.676)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6762624382972717
+      },
+      {
+        "doc_id": "f0d42e1c-946f-4346-a1a1-aa0455c78a9e",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.662)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6618125140666962
+      },
+      {
+        "doc_id": "521f6358-8738-47fb-abd3-efb57cd74da8",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.659)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.659421443939209
+      }
+    ]
+  },
+  "q019": {
+    "query": "Incident response for AI failures",
+    "category": "Risk Management",
+    "expected_topics": [
+      "incident response",
+      "AI failures",
+      "recovery procedures"
+    ],
+    "judgments": [
+      {
+        "doc_id": "558140ef-37d6-4f28-b87c-f8d849f6f5a8",
+        "relevance": 2,
+        "reasoning": "High similarity score (0.761)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7605514228343964
+      },
+      {
+        "doc_id": "250600f5-d9b5-4ee3-8387-d13b6b5dc6ac",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.746)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7456492781639099
+      },
+      {
+        "doc_id": "b964d123-e546-4ffc-b348-73687c1cda7d",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.735)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7352155447006226
+      },
+      {
+        "doc_id": "38345c0a-c695-498e-b212-be5660b8d1c5",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.722)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7218682765960693
+      },
+      {
+        "doc_id": "e6cbc15e-d858-46ac-927a-976f0fc0d00b",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.701)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7012342810630798
+      },
+      {
+        "doc_id": "11f3e551-84a3-4af0-aaa1-64a756f6d373",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.679)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6790009140968323
+      },
+      {
+        "doc_id": "4465ec4f-b202-45d8-9acb-9db018135ec8",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.672)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6720395386219025
+      },
+      {
+        "doc_id": "0f2949f6-26a4-4363-9cec-511af3d2aefd",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.659)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6589565873146057
+      },
+      {
+        "doc_id": "521f6358-8738-47fb-abd3-efb57cd74da8",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.658)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6580286622047424
+      },
+      {
+        "doc_id": "5c39a2a7-f098-48db-a062-e440a3c0bed4",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.656)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6560876071453094
+      }
+    ]
+  },
+  "q020": {
+    "query": "Security audits for AI systems",
+    "category": "Governance & Policy",
+    "expected_topics": [
+      "security audits",
+      "AI assessment",
+      "compliance audits"
+    ],
+    "judgments": [
+      {
+        "doc_id": "11f3e551-84a3-4af0-aaa1-64a756f6d373",
+        "relevance": 2,
+        "reasoning": "High similarity score (0.792)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7921874821186066
+      },
+      {
+        "doc_id": "558140ef-37d6-4f28-b87c-f8d849f6f5a8",
+        "relevance": 2,
+        "reasoning": "High similarity score (0.782)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7817254960536957
+      },
+      {
+        "doc_id": "b964d123-e546-4ffc-b348-73687c1cda7d",
+        "relevance": 2,
+        "reasoning": "High similarity score (0.774)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7736728489398956
+      },
+      {
+        "doc_id": "250600f5-d9b5-4ee3-8387-d13b6b5dc6ac",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.742)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7420052886009216
+      },
+      {
+        "doc_id": "38345c0a-c695-498e-b212-be5660b8d1c5",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.739)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.738801509141922
+      },
+      {
+        "doc_id": "e6cbc15e-d858-46ac-927a-976f0fc0d00b",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.720)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.7199099361896515
+      },
+      {
+        "doc_id": "f0d42e1c-946f-4346-a1a1-aa0455c78a9e",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.675)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6746389269828796
+      },
+      {
+        "doc_id": "4444e9ac-3619-4c59-8d7c-76f3f6d1de35",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.656)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.656261146068573
+      },
+      {
+        "doc_id": "16c40e72-e28a-4918-8008-3158c8fc0c0c",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.655)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6553515195846558
+      },
+      {
+        "doc_id": "0f2949f6-26a4-4363-9cec-511af3d2aefd",
+        "relevance": 1,
+        "reasoning": "Medium similarity score (0.651)",
+        "key_matches": [],
+        "source": "heuristic",
+        "score": 0.6513549089431763
+      }
+    ]
+  }
+}

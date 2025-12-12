@@ -1,16 +1,10 @@
 {
   "source": "/home/lupise/liquid-ai-stack/liquid-ai-stack/liquid-shared-core/data/raw/Artificial Intelligence and Cybersecurity Research.pdf",
-  "processed_at": "2025-12-11T23:20:03.610157",
-  "stats": {
-    "chunking_strategy": "agent",
-    "num_chunks": 1,
-    "num_qa_generated": 4,
-    "num_qa_validated": 3,
-    "qa_pass_rate": 0.75,
-    "num_ft_samples": 3
-  },
-  "num_chunks": 1,
-  "num_summaries": 1,
-  "num_qa_pairs": 3,
-  "num_ft_samples": 3
+  "processed_at": "2025-12-12T22:30:03.886057",
+  "num_chunks": 12,
+  "avg_chunk_size": 14391.75,
+  "max_chunk_size": 15791,
+  "min_chunk_size": 12006,
+  "total_chars": 103809,
+  "qa_pairs": 0
 }

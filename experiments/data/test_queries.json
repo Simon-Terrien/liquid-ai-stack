@@ -1,0 +1,138 @@
+{
+  "queries": [
+    {
+      "id": "q001",
+      "text": "What are adversarial attacks on machine learning models?",
+      "category": "AI/ML Security",
+      "expected_topics": ["adversarial attacks", "model security", "AI vulnerabilities"]
+    },
+    {
+      "id": "q002",
+      "text": "How to defend against model poisoning?",
+      "category": "AI/ML Security",
+      "expected_topics": ["model poisoning", "defense strategies", "data validation"]
+    },
+    {
+      "id": "q003",
+      "text": "What is adversarial training?",
+      "category": "AI/ML Security",
+      "expected_topics": ["adversarial training", "model robustness", "defense techniques"]
+    },
+    {
+      "id": "q004",
+      "text": "Model robustness techniques",
+      "category": "Technical Controls",
+      "expected_topics": ["model robustness", "defensive measures", "AI security"]
+    },
+    {
+      "id": "q005",
+      "text": "Security risks in production AI systems",
+      "category": "Risk Management",
+      "expected_topics": ["production security", "AI risks", "operational security"]
+    },
+    {
+      "id": "q006",
+      "text": "GDPR requirements for AI systems",
+      "category": "Data Protection",
+      "expected_topics": ["GDPR", "AI compliance", "data protection"]
+    },
+    {
+      "id": "q007",
+      "text": "Data protection measures for machine learning",
+      "category": "Data Protection",
+      "expected_topics": ["data protection", "ML privacy", "security measures"]
+    },
+    {
+      "id": "q008",
+      "text": "Privacy regulations for AI",
+      "category": "Governance & Policy",
+      "expected_topics": ["privacy", "regulations", "AI governance"]
+    },
+    {
+      "id": "q009",
+      "text": "Personal data handling in AI",
+      "category": "Data Protection",
+      "expected_topics": ["personal data", "AI privacy", "data handling"]
+    },
+    {
+      "id": "q010",
+      "text": "GDPR compliance requirements",
+      "category": "Governance & Policy",
+      "expected_topics": ["GDPR", "compliance", "regulatory requirements"]
+    },
+    {
+      "id": "q011",
+      "text": "Cyber insurance for AI systems",
+      "category": "Cyber Insurance",
+      "expected_topics": ["cyber insurance", "AI coverage", "risk insurance"]
+    },
+    {
+      "id": "q012",
+      "text": "Risk assessment for AI insurance",
+      "category": "Cyber Insurance",
+      "expected_topics": ["risk assessment", "insurance", "AI risks"]
+    },
+    {
+      "id": "q013",
+      "text": "Insurance coverage for AI incidents",
+      "category": "Cyber Insurance",
+      "expected_topics": ["insurance coverage", "AI incidents", "claims"]
+    },
+    {
+      "id": "q014",
+      "text": "Input validation for ML models",
+      "category": "Technical Controls",
+      "expected_topics": ["input validation", "data sanitization", "ML security"]
+    },
+    {
+      "id": "q015",
+      "text": "Runtime monitoring for AI systems",
+      "category": "Technical Controls",
+      "expected_topics": ["runtime monitoring", "system monitoring", "AI operations"]
+    },
+    {
+      "id": "q016",
+      "text": "Anomaly detection in production",
+      "category": "Technical Controls",
+      "expected_topics": ["anomaly detection", "production monitoring", "security monitoring"]
+    },
+    {
+      "id": "q017",
+      "text": "Model ensemble techniques",
+      "category": "AI/ML Security",
+      "expected_topics": ["model ensembles", "robustness", "ML techniques"]
+    },
+    {
+      "id": "q018",
+      "text": "Threat intelligence for AI",
+      "category": "Threat Intelligence",
+      "expected_topics": ["threat intelligence", "AI threats", "security intelligence"]
+    },
+    {
+      "id": "q019",
+      "text": "Incident response for AI failures",
+      "category": "Risk Management",
+      "expected_topics": ["incident response", "AI failures", "recovery procedures"]
+    },
+    {
+      "id": "q020",
+      "text": "Security audits for AI systems",
+      "category": "Governance & Policy",
+      "expected_topics": ["security audits", "AI assessment", "compliance audits"]
+    }
+  ],
+  "metadata": {
+    "total_queries": 20,
+    "categories": {
+      "AI/ML Security": 5,
+      "Data Protection": 3,
+      "Governance & Policy": 3,
+      "Cyber Insurance": 3,
+      "Technical Controls": 4,
+      "Threat Intelligence": 1,
+      "Risk Management": 2
+    },
+    "created": "2025-12-12",
+    "purpose": "Metadata ablation study test queries"
+  }
+}
