@@ -101,7 +101,7 @@ Remaining roadmap areas to implement:
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/liquid-ai-stack.git
+git clone https://github.com/Simon-TERRIEN/liquid-ai-stack.git
 cd liquid-ai-stack
 
 # Create directories
